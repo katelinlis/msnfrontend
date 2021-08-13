@@ -1,0 +1,15 @@
+<div style="position: relative;height:76px;background: #DBDBDB;">
+  <img alt="MSN - modern social network alpha" src="/img/Logo.svg">
+  <div onclick="logout()" style="
+      margin-right: 10px;
+      margin-top: 55px;
+      float: right;
+      white-space: nowrap;
+  ">logout</div>
+  <script>
+    function logout() {
+      localStorage.removeItem('token');
+      document.location.href = "https://social.katelinlis.xyz/login.html"
+    }
+  </script>
+</div>

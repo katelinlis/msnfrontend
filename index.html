@@ -1,0 +1,64 @@
+<html>
+
+<head>
+  <title>MSN - Modern Social Network</title>
+  <meta property="og:description" content="Modern Social Network - тестовый проект соц сети для портфолио" />
+  <script>
+    let token = localStorage.getItem('token');
+    if (!token) document.location.href = "https://social.katelinlis.xyz/login.html"
+    axios.get('/api/auth/user/', { headers: { Authorization: `Bearer ${token}` } })
+      .then(function (response) {
+        console.log(response);
+        document.getElementById("username").innerText = response.data.user.username
+      })
+      .catch(function (error) {
+        localStorage.removeItem('token');
+        document.location.href = "https://social.katelinlis.xyz/login.html"
+      });
+    let userid = window.location.href.slice(35)
+    if (userid > 0) { console.log(userid) }
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      width: 100%;
+      margin: 0;
+    }
+
+    .content {
+      left: 15%;
+      width: 80%;
+    }
+
+    .container {
+      left: 10%;
+      width: 70vw;
+    }
+
+    @media only screen and (max-width: 768px) {
+      .content {
+        left: 10%;
+        width: 80%;
+      }
+
+      .container {
+        left: 10%;
+        width: 80vw;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" style="position: relative;background: #F8F5F5;height:800px;">
+    {{include "/includes/header.html"}}
+    <div class="content" style="position: absolute; ;background: #C4C4C4;height:700px;z-index:1">
+      <div style="text-align:center">
+        <h3>News</h3>
+      </div>
+    </div>
+    {{include "/includes/navs.html"}}
+  </div>
+  </doby>
+
+</html>

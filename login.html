@@ -1,0 +1,77 @@
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>MSN - Modern Social Network</title>
+  <meta property="og:description" content="Modern Social Network - тестовый проект соц сети для портфолио" />
+  <script>
+    function regiter() {
+      axios.post('/api/auth/login', {
+        username: document.getElementById("username").value,
+        password: document.getElementById("password").value
+      })
+        .then(function (response) {
+          if (response.data && response.data.token)
+            window.localStorage.setItem('token', response.data.token)
+          document.location.href = "https://social.katelinlis.xyz/user.html"
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      width: 100%;
+      margin: 0;
+    }
+
+    .content {
+      left: 15%;
+      width: 80%;
+    }
+
+    .container {
+      left: 10%;
+      width: 70vw;
+    }
+
+    @media only screen and (max-width: 768px) {
+      .content {
+        left: 10%;
+        width: 80%;
+      }
+
+      .container {
+        left: 10%;
+        width: 80vw;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" style="position: relative;background: #F8F5F5;height:800px;">
+    {{include "/includes/header.html"}}
+    <div class="content" style="position: absolute; ;background: #C4C4C4;height:700px;z-index:1">
+      <div style="text-align:center">
+        <label for="username">username</label>
+        <input type="text" id="username"> <br />
+        <label for="password">password</label>
+        <input type="password" id="password"> <br />
+        <button onclick="regiter()">войти или создать аккаунт</button>
+
+      </div>
+    </div>
+    <div style="position: relative;">
+      <a href="/user.html">Моя страница</a> <br />
+      <a href="/">Лента</a> <br />
+      Друзья <br />
+      Другое <br />
+    </div>
+  </div>
+  </doby>
+
+</html>
