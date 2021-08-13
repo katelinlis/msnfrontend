@@ -8,14 +8,12 @@
     axios.get('/api/auth/user/', { headers: { Authorization: `Bearer ${token}` } })
       .then(function (response) {
         console.log(response);
-        document.getElementById("username").innerText = response.data.user.username
       })
       .catch(function (error) {
+        console.log(error)
         localStorage.removeItem('token');
         document.location.href = "https://social.katelinlis.xyz/login.html"
       });
-    let userid = window.location.href.slice(35)
-    if (userid > 0) { console.log(userid) }
   </script>
 </head>
 
