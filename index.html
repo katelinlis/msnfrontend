@@ -1,8 +1,7 @@
 <html>
 
 <head>
-  <title>MSN - Modern Social Network</title>
-  <meta property="og:description" content="Modern Social Network - тестовый проект соц сети для портфолио" />
+  {{include "/includes/head.html"}}
   <script>
     let token = localStorage.getItem('token');
     if (!token) document.location.href = "https://social.katelinlis.xyz/login.html"
@@ -18,35 +17,6 @@
     let userid = window.location.href.slice(35)
     if (userid > 0) { console.log(userid) }
   </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      width: 100%;
-      margin: 0;
-    }
-
-    .content {
-      left: 15%;
-      width: 80%;
-    }
-
-    .container {
-      left: 10%;
-      width: 70vw;
-    }
-
-    @media only screen and (max-width: 768px) {
-      .content {
-        left: 10%;
-        width: 80%;
-      }
-
-      .container {
-        left: 10%;
-        width: 80vw;
-      }
-    }
-  </style>
 </head>
 
 <body>

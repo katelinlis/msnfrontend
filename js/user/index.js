@@ -67,3 +67,11 @@ async function main(this_user) {
     document.getElementById("count_friends").innerText = friends_count ? friends_count : 0
   }
 }
+
+
+function mouseover() {
+  document.getElementById('changeAvatarButton').style.visibility = 'visible'
+}
+function mouseleave() {
+  document.getElementById('changeAvatarButton').style.visibility = 'hidden'
+}
