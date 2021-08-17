@@ -42,6 +42,8 @@ async function main(this_user) {
       .then(function (response) {
         console.log(response);
         document.getElementById("username").innerText = response.data.user.username
+        if (response.data.user.avatar)
+          document.getElementById("avatarPhoto").setAttribute('src', `/api/static/${response.data.user.id}/${response.data.user.avatar}`)
         friend_status = response.data.friend_status
         let friends_count = response.data.user.friends
         document.getElementById("count_friends").innerText = friends_count ? friends_count : 0
@@ -65,9 +67,18 @@ async function main(this_user) {
     let friends_count = this_user.user.friends
     document.getElementById("username").innerText = this_user.user.username
     document.getElementById("count_friends").innerText = friends_count ? friends_count : 0
+    if (this_user.user.avatar)
+      document.getElementById("avatarPhoto").setAttribute('src', `/api/static/${this_user.user.id}/${this_user.user.avatar}`)
   }
 }
 
+function Upload() {
+  let photo = document.getElementById("avatarUpload").files[0];
+  let formData = new FormData();
+
+  formData.append("photo", photo);
+  fetch('/api/user/upload_avatar', { method: "POST", body: formData, headers: { Authorization: `Bearer ${token}` } });
+}
 
 function mouseover() {
   document.getElementById('changeAvatarButton').style.visibility = 'visible'
