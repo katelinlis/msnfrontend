@@ -8,7 +8,8 @@ function register() {
       if (response.data && response.data.token)
         window.localStorage.setItem('token', response.data.token);
       setCookie('token', response.data.token);
-      //document.location.href = 'https://social.katelinlis.xyz/user.html';
+      document.location.href =
+        'https://social.katelinlis.xyz/user/' + response.data.userid;
       console.log(response);
     })
     .catch(function (error) {
