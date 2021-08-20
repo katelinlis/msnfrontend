@@ -24,9 +24,10 @@ type UsersExport = {
 
 @Injectable()
 export class AppService {
-  async getUser(id: number): Promise<user> {
+  async getUser(id: number, token: string): Promise<user> {
     const response = await axios.get(
       'https://social.katelinlis.xyz/api/user/get/' + id,
+      { headers: { authorization: 'beaber ' + token } },
     );
     const user = response.data;
     console.log(user);

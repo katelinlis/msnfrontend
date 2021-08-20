@@ -1,6 +1,10 @@
-import { Controller, Get, Res, Param } from '@nestjs/common';
+import { Controller, Get, Res, Param, Req, Request } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Render } from '@nestjs/common';
+
+interface RequestCoockie extends Request {
+  cookies: any;
+}
 
 @Controller()
 export class AppController {
@@ -37,8 +41,10 @@ export class AppController {
 
   @Get('/user/:id')
   @Render('user')
-  async getUser(@Param('id') id: number) {
-    const user = await this.appService.getUser(id);
+  async getUser(@Req() request: RequestCoockie, @Param('id') id: number) {
+    let token = '';
+    if (request.cookies && request.cookies.token) token = request.cookies.token;
+    const user = await this.appService.getUser(id, token);
 
     return { user };
   }
