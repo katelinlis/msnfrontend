@@ -65,6 +65,10 @@ export class AppController {
       return { user, auth: { status: false } };
     });
 
-    return { user, auth: { user: auth, status: auth ? true : false } };
+    return {
+      user,
+      auth: { user: auth, status: auth ? true : false },
+      title: `${user.username} - `,
+    };
   }
 }

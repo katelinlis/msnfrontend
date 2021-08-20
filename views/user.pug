@@ -1,58 +1,49 @@
-doctype html
-html(lang="ru")
-  head
-    meta(charset="UTF-8")
-    link(rel="stylesheet" href="/css/index.css")
-    script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
-    script
-      include js/user.js
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title #{user.username} - MSN
-    style
-      include css/user.css
-  body
-    .container
-      include include/header.pug
-      .content
-        span#username #{user.username}
+extends layout.pug
+block content
+  .content
+    span#username #{user.username}
+    br
+    div(onmouseout="mouseleave(event)" onmouseover="mouseover(event)" style="width: 240px;height: 240px;")
+      #changeAvatarButton
+        span#ChangeAvatarButton(onclick="document.getElementById('avatarUpload').click()") change avatar
+        input#avatarUpload(style="display: none;" onchange="Upload()" type="file" accept="image/jpeg,image/png")
+      if user.avatar
+        img#avatarPhoto(alt="user avatar" src=`https://social.katelinlis.xyz/api/static/${user.id}/${user.avatar}`)
+      else
+        img#avatarPhoto(alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
+    if user.me
+      #EditUser
+        button(style="width:150px") Обновить информацию
+    else
+      #friendRequestAndSendMessage
+        button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") Friend request
         br
-        div(onmouseout="mouseleave(event)" onmouseover="mouseover(event)" style="width: 240px;height: 240px;")
-          #changeAvatarButton
-            span#ChangeAvatarButton(onclick="document.getElementById('avatarUpload').click()") change avatar
-            input#avatarUpload(style="display: none;" onchange="Upload()" type="file" accept="image/jpeg,image/png")
-          if user.avatar
-            img#avatarPhoto(alt="user avatar" src=`https://social.katelinlis.xyz/api/static/${user.id}/${user.avatar}`)
-          else
-            img#avatarPhoto(alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
-        if user.me
-          #EditUser
-            button(style="width:150px") Обновить информацию
-        else
-          #friendRequestAndSendMessage
-            button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") Friend request
-            br
-            button(style="width:150px") Send Message
-        .friends
-          div(style="margin-left:8px")
-            span#FriendsTitle Friends
-            span#count_friends #{user.friends}
-            div
-              span#friend
-                img(src="/friendImg.svg")
-                span user
-              span#friend
-                img(src="/friendImg.svg")
-                span user
-              span#friend
-                img(src="/friendImg.svg")
-                span user
-              span#friend
-                img(src="/friendImg.svg")
-                span user
-              span#friend
-                img(src="/friendImg.svg")
-                span user
-              span#friend
-                img(src="/friendImg.svg")
-                span user
-      include include/navs.pug
+        button(style="width:150px") Send Message
+    .friends
+      div(style="margin-left:8px")
+        span#FriendsTitle Friends
+        span#count_friends #{user.friends}
+        div
+          span#friend
+            img(src="/friendImg.svg")
+            span user
+          span#friend
+            img(src="/friendImg.svg")
+            span user
+          span#friend
+            img(src="/friendImg.svg")
+            span user
+          span#friend
+            img(src="/friendImg.svg")
+            span user
+          span#friend
+            img(src="/friendImg.svg")
+            span user
+          span#friend
+            img(src="/friendImg.svg")
+            span user
+block scripts
+  style
+    include css/user.css
+  script
+    include js/user.js
