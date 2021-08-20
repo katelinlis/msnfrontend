@@ -20,7 +20,10 @@ html(lang="ru")
           #changeAvatarButton
             span#ChangeAvatarButton(onclick="document.getElementById('avatarUpload').click()") change avatar
             input#avatarUpload(style="display: none;" onchange="Upload()" type="file" accept="image/jpeg,image/png")
-          img#avatarPhoto(alt="user avatar" src=`https://social.katelinlis.xyz/api/static/${user.id}/${user.avatar}`)
+          if user.avatar
+            img#avatarPhoto(alt="user avatar" src=`https://social.katelinlis.xyz/api/static/${user.id}/${user.avatar}`)
+          else
+            img#avatarPhoto(alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
         if user.me
           #EditUser
             button(style="width:150px") Обновить информацию
