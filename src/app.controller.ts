@@ -62,12 +62,14 @@ export class AppController {
     const user = await this.appService.getUser(id, token);
 
     const auth = await this.appService.getUserByToken(token).catch((err) => {
-      return { user, auth: { status: false } };
+      return err;
     });
+
+    console.log(auth);
 
     return {
       user,
-      auth: { user: auth, status: auth ? true : false },
+      auth,
       title: `${user.username} - `,
     };
   }
