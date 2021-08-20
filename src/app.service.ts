@@ -9,6 +9,19 @@ type user = {
   avatar: string;
 };
 
+type ArrayUser = [
+  {
+    id: number;
+    username: string;
+    avatar: string;
+  },
+];
+
+type UsersExport = {
+  users: ArrayUser;
+  total: number;
+};
+
 @Injectable()
 export class AppService {
   async getUser(id: number): Promise<user> {
@@ -24,5 +37,13 @@ export class AppService {
       avatar: user.user.avatar,
       me: user.user.me,
     };
+  }
+  async getUsers(): Promise<UsersExport> {
+    const response = await axios.get(
+      'https://social.katelinlis.xyz/api/user/get/',
+    );
+    const user = response.data;
+
+    return { users: user.users, total: user.total };
   }
 }

@@ -1,10 +1,9 @@
 let token = localStorage.getItem('token');
 let headers = {};
 if (token) headers['Authorization'] = `Bearer ${token}`;
-axios
+/*axios
   .get('https://social.katelinlis.xyz/api/user/get/', { headers })
   .then(function (response) {
-    document.getElementById('countusers').innerText = response.data.total;
     let usersElementRow = document.createElement('div');
     response.data.users.forEach((user, index) => {
       if (
@@ -26,3 +25,4 @@ axios
       usersElementRow.appendChild(element);
     });
   });
+*/

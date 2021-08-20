@@ -6,6 +6,8 @@ html(lang="en")
     script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title MSN
+    style
+      include css/users.css
     script
       include js/users.js
   body
@@ -14,6 +16,17 @@ html(lang="en")
       .content(style="position: absolute; ;background: #C4C4C4;height:700px;z-index:1")
         div(style="text-align:center")
           h3 Users
-            span#countusers
+            span#countusers (#{UsersExport.total})
           #users
+            each user, index in UsersExport.users
+              span(style="")
+                a(href=`/user/${user.id}` style="")
+                  if user.avatar
+                    img(height="40px" width="40px" src=`https://social.katelinlis.xyz/api/static/${user.id}/${user.avatar}`)
+                  else
+                    img(height="40px" width="40px" src="https://social.katelinlis.xyz/UserProfileImage.svg")
+                  span #{user.username}
+
+
+
       include include/navs.pug

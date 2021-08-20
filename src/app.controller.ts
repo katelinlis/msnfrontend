@@ -30,7 +30,9 @@ export class AppController {
   @Get('/users')
   @Render('users')
   async users() {
-    return {};
+    const UsersExport = await this.appService.getUsers();
+    console.log(UsersExport);
+    return { UsersExport };
   }
 
   @Get('/user/:id')

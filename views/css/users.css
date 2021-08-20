@@ -1,0 +1,12 @@
+#countusers{
+  margin-left: 4px;
+    color: #676767
+}
+
+#users> span {
+  width:110px;display: inline-block;
+  margin-bottom: 20px;
+}
+#users> span > a > span {
+  width:75px;display: inline-block;
+}
