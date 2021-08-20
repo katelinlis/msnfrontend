@@ -1,0 +1,6 @@
+li {
+    list-style-type: none; /* Убираем маркеры */
+   }
+   ul {
+    padding-left: 10px; /* Сдвигаем список влево */
+   }

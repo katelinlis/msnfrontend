@@ -2,17 +2,18 @@ let friend_status
 let this_user
 let token = localStorage.getItem('token');
 let userid = window.location.href.slice(35)
-if (!token) document.location.href = "https://social.katelinlis.xyz/login.html"
-axios.get('/api/auth/user/', { headers: { Authorization: `Bearer ${token}` } })
+let headers = {}
+if (token) headers['Authorization'] = `Bearer ${token}`
+axios.get('/api/auth/user/', { headers })
   .then(function (response) {
     console.log(response);
     this_user = response.data
+    document.getElementById('linktomypage').setAttribute('href', `/user/${this_user.user.id}/`)
     main(this_user)
+  }).catch(err => {
+    main()
   })
-  .catch(function (error) {
-    localStorage.removeItem('token');
-    document.location.href = "https://social.katelinlis.xyz/login.html"
-  });
+
 
 async function request_friend() {
   if (friend_status.status === 0 && friend_status.forme === true) {
@@ -38,7 +39,7 @@ async function request_friend() {
 async function main(this_user) {
   if (userid > 0) {
     console.log(userid)
-    axios.get('/api/user/get/' + userid, { headers: { Authorization: `Bearer ${token}` } })
+    axios.get('/api/user/get/' + userid, { headers })
       .then(function (response) {
         console.log(response);
         document.getElementById("username").innerText = response.data.user.username

@@ -1,0 +1,77 @@
+.container{
+  position: relative;
+  background: #F8F5F5;
+  height:800px;
+}
+.content{
+  position: absolute;
+  background: #C4C4C4;
+  height:700px;
+  z-index:1;
+}
+
+#username{
+  font-size: 24px;
+  line-height: 31px;
+  padding-left: 71px;
+  padding-top: 12px;
+}
+
+#avatarPhoto{
+  width: 240px;
+  height: 240px;
+  border-radius: 100%
+}
+
+#count_friends{
+  font-size: 24px;
+  line-height: 31px;
+  color: #8C8C8C;
+}
+
+#ChangeAvatarButton{
+  position: relative;
+  color: wheat;
+  text-align: center;
+  display: inherit;
+}
+
+#friend{
+  width: 27px;
+  display: inline-block;
+  margin-right:5px
+}
+
+#FriendsTitle{
+  font-size: 24px;
+  line-height: 31px;
+  color:#000000;
+}
+
+#EditUser{
+  margin-left:50px;
+  display:none
+}
+
+#friendRequestAndSendMessage{
+  margin-left:50px;
+  display:none
+}
+
+#changeAvatarButton{
+  background: #80808069;
+  width: 240px;
+  height: 20px;
+  position: absolute;
+  top: 251px;z-index: 10;
+  visibility: hidden;
+}
+.friends{
+  background: #FFFFFF;
+  border-radius: 21px;
+  width:200px;
+  margin-top:37px;
+  margin-left:11px;
+  height:94px
+}
+

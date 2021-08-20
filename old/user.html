@@ -22,10 +22,13 @@
         <img alt="user avatar" id="avatarPhoto" style="width: 240px;height: 240px;border-radius: 100%"
           src="/UserProfileImage.svg">
       </div>
-      <div id="friendRequestAndSendMessage" style="margin-left:50px;display:none"><button id="ButtonSendRequestFriend"
-          onclick="request_friend()" style="width:150px">Friend request</button><br /><button style="width:150px">Send
-          Message</button></div>
-      <div id="EditUser" style="margin-left:50px;display:none"><button style="width:150px">Обновить информацию</button>
+      <div id="friendRequestAndSendMessage" style="margin-left:50px;display:none">
+        <button id="ButtonSendRequestFriend" onclick="request_friend()" style="width:150px">Friend request</button>
+        <br />
+        <button style="width:150px">Send Message</button>
+      </div>
+      <div id="EditUser" style="margin-left:50px;display:none">
+        <button style="width:150px">Обновить информацию</button>
       </div>
 
       <div style="background: #FFFFFF;border-radius: 21px;width:200px;margin-top:37px;margin-left:11px;height:94px">
@@ -43,12 +46,7 @@
         </div>
       </div>
     </div>
-    <div style="position: relative;">
-      Моя страница <br />
-      <a href="/">Лента</a> <br />
-      Друзья <br />
-      Другое <br />
-    </div>
+    {{include "/includes/navs.html"}}
   </div>
   </doby>
 

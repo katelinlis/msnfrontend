@@ -1,0 +1,53 @@
+doctype html
+html(lang="ru")
+  head
+    meta(charset="UTF-8")
+    link(rel="stylesheet" href="/css/index.css")
+    script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+    script
+      include js/user.js
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title MSN
+    style
+      include css/user.css
+  body
+    .container
+      include include/header.pug
+      .content
+        span#username #{id}
+        br
+        div(onmouseout="mouseleave(event)" onmouseover="mouseover(event)" style="width: 240px;height: 240px;")
+          #changeAvatarButton
+            span#ChangeAvatarButton(onclick="document.getElementById('avatarUpload').click()") change avatar
+            input#avatarUpload(style="display: none;" onchange="Upload()" type="file" accept="image/jpeg,image/png")
+          img#avatarPhoto(alt="user avatar" src="/UserProfileImage.svg")
+        #friendRequestAndSendMessage
+          button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") Friend request
+          br
+          button(style="width:150px") Send Message
+        #EditUser
+          button(style="width:150px") Обновить информацию
+        .friends
+          div(style="margin-left:8px")
+            span#FriendsTitle Friends
+            span#count_friends 100
+            div
+              span#friend
+                img(src="/friendImg.svg")
+                span user
+              span#friend
+                img(src="/friendImg.svg")
+                span user
+              span#friend
+                img(src="/friendImg.svg")
+                span user
+              span#friend
+                img(src="/friendImg.svg")
+                span user
+              span#friend
+                img(src="/friendImg.svg")
+                span user
+              span#friend
+                img(src="/friendImg.svg")
+                span user
+      include include/navs.pug

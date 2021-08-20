@@ -8,6 +8,7 @@
     axios.get('/api/auth/user/', { headers: { Authorization: `Bearer ${token}` } })
       .then(function (response) {
         console.log(response);
+        document.getElementById('linktomypage').setAttribute('href', `/user/${response.data.user.id}/`)
       })
       .catch(function (error) {
         console.log(error)
