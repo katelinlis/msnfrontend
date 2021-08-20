@@ -3,7 +3,8 @@ div(style="position: relative;")
     include ./nav.css
   ul
     li
-      a(id="linktomypage" href="/user.html") Моя страница
+      if auth.status
+        a(id="linktomypage" href=`/user/${auth.user.id}`) Моя страница
     li
       a(href="/") Лента
     li

@@ -33,7 +33,7 @@ export class AppService {
         throw 'no auth';
       });
     const user = response.data;
-    console.log(user);
+
     return {
       id: user.user.id,
       username: user.user.username,
@@ -48,7 +48,7 @@ export class AppService {
       { headers: { authorization: 'beaber ' + token } },
     );
     const user = response.data;
-    console.log(user);
+
     return {
       id: user.user.id,
       username: user.user.username,
