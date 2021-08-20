@@ -12,7 +12,12 @@ export class AppController {
 
   @Get()
   async MainPageRedirect(@Req() request: RequestCoockie, @Res() res) {
-    const userAuth = true;
+    let token = '';
+    if (request.cookies && request.cookies.token) token = request.cookies.token;
+    const auth = await this.appService.getUserByToken(token).catch((err) => {
+      return err;
+    });
+    const userAuth = auth.auth;
     if (!userAuth) res.redirect('/login');
     else res.redirect('/news');
   }
@@ -23,10 +28,10 @@ export class AppController {
     let token = '';
     if (request.cookies && request.cookies.token) token = request.cookies.token;
     const auth = await this.appService.getUserByToken(token).catch((err) => {
-      return { auth: { status: false } };
+      return err;
     });
 
-    return { auth: { user: auth, status: auth ? true : false } };
+    return { auth };
   }
 
   @Get('/login')
@@ -35,10 +40,10 @@ export class AppController {
     let token = '';
     if (request.cookies && request.cookies.token) token = request.cookies.token;
     const auth = await this.appService.getUserByToken(token).catch((err) => {
-      return { auth: { status: false } };
+      return err;
     });
 
-    return { auth: { user: auth, status: auth ? true : false } };
+    return { auth };
   }
 
   @Get('/users')
@@ -48,10 +53,10 @@ export class AppController {
     let token = '';
     if (request.cookies && request.cookies.token) token = request.cookies.token;
     const auth = await this.appService.getUserByToken(token).catch((err) => {
-      return { UsersExport, auth: { status: false } };
+      return err;
     });
 
-    return { UsersExport, auth: { user: auth, status: auth ? true : false } };
+    return { UsersExport, auth };
   }
 
   @Get('/user/:id')
@@ -64,8 +69,6 @@ export class AppController {
     const auth = await this.appService.getUserByToken(token).catch((err) => {
       return err;
     });
-
-    console.log(auth);
 
     return {
       user,
