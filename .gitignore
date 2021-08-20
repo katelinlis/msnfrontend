@@ -396,3 +396,4 @@ Temporary Items
 # Local
 .env
 dist
+package-lock.json

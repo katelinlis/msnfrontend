@@ -51,27 +51,15 @@ async function request_friend() {
         console.log(error);
       });
 }
-async function main(this_user) {
+async function main() {
   if (userid > 0) {
     console.log(userid);
     axios
       .get('https://social.katelinlis.xyz/api/user/get/' + userid, { headers })
       .then(function (response) {
         console.log(response);
-        document.getElementById('username').innerText =
-          response.data.user.username;
-        if (response.data.user.avatar)
-          document
-            .getElementById('avatarPhoto')
-            .setAttribute(
-              'src',
-              `https://social.katelinlis.xyz/api/static/${response.data.user.id}/${response.data.user.avatar}`,
-            );
+
         friend_status = response.data.friend_status;
-        let friends_count = response.data.user.friends;
-        document.getElementById('count_friends').innerText = friends_count
-          ? friends_count
-          : 0;
 
         if (!response.data.user.me) {
           document.getElementById('friendRequestAndSendMessage').style.display =
@@ -91,19 +79,6 @@ async function main(this_user) {
       .catch(function (error) {
         console.log(error);
       });
-  } else {
-    let friends_count = this_user.user.friends;
-    document.getElementById('username').innerText = this_user.user.username;
-    document.getElementById('count_friends').innerText = friends_count
-      ? friends_count
-      : 0;
-    if (this_user.user.avatar)
-      document
-        .getElementById('avatarPhoto')
-        .setAttribute(
-          'src',
-          `/api/static/${this_user.user.id}/${this_user.user.avatar}`,
-        );
   }
 }
 

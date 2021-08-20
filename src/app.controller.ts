@@ -29,13 +29,15 @@ export class AppController {
 
   @Get('/users')
   @Render('users')
-  users() {
+  async users() {
     return {};
   }
 
   @Get('/user/:id')
   @Render('user')
-  getHello2(@Param('id') id: number) {
-    return { id };
+  async getUser(@Param('id') id: number) {
+    const user = await this.appService.getUser(id);
+
+    return { user };
   }
 }
