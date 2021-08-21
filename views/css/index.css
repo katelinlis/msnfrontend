@@ -13,6 +13,11 @@ body {
   width: 70vw;
 }
 
+#AvatarBox{
+  width: 240px;
+  height: 240px;
+}
+
 @media only screen and (max-width: 768px) {
   .content {
     left: 10%;
