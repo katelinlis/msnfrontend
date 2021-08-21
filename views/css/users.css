@@ -10,3 +10,7 @@
 #users> span > a > span {
   width:75px;display: inline-block;
 }
+#users span a img{
+  object-fit: cover;
+  border-radius: 100%;
+}
