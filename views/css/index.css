@@ -42,7 +42,7 @@ body {
   }
 
   .content {
-    position: relative;
+    position: absolute;
     margin: 0 auto;
   }
 
@@ -67,5 +67,9 @@ body {
   .friends {
     width: 75vw;
     margin: 20px auto 20px auto;
+  }
+  #AvatarBox {
+    width: auto;
+    height: auto;
   }
 }

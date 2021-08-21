@@ -3,7 +3,7 @@ block content
   .content
     span#username #{user.username}
     br
-    div(onmouseout="mouseleave(event)" onmouseover="mouseover(event)" style="width: 240px;height: 240px;")
+    div#AvatarBox(onmouseout="mouseleave(event)" onmouseover="mouseover(event)" style="width: 240px;height: 240px;")
       #changeAvatarButton
         span#ChangeAvatarButton(onclick="document.getElementById('avatarUpload').click()") change avatar
         input#avatarUpload(style="display: none;" onchange="Upload()" type="file" accept="image/jpeg,image/png")
