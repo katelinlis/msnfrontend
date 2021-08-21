@@ -8,7 +8,11 @@ function getCookie(name) {
   );
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
-
+function deleteCookie(name) {
+  setCookie(name, "", {
+    'max-age': -1
+  })
+}
 function setCookie(name, value, options = {}) {
   options = {
     path: '/',
@@ -35,5 +39,6 @@ function setCookie(name, value, options = {}) {
 }
 function logout() {
   localStorage.removeItem('token');
+  deleteCookie('token')
   document.location.href = "https://social.katelinlis.xyz/login"
 }
