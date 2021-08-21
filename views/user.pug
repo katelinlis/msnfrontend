@@ -21,7 +21,8 @@ block content
         button(style="width:150px") Send Message
     .friends
       div(style="margin-left:8px")
-        span#FriendsTitle Friends
+        span#FriendsTitle
+          a(href=`/user/${user.id}/friends` style="text-decoration: unset;color: #000000;") Friends
         span#count_friends #{user.friends}
         div
           span#friend

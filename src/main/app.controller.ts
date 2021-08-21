@@ -1,5 +1,5 @@
 import { Controller, Get, Res, Param, Req, Request } from '@nestjs/common';
-import { AppService } from './app.service';
+import { MainService } from './app.service';
 import { Render } from '@nestjs/common';
 
 interface RequestCoockie extends Request {
@@ -7,8 +7,8 @@ interface RequestCoockie extends Request {
 }
 
 @Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+export class MainController {
+  constructor(private readonly appService: MainService) {}
 
   @Get()
   async MainPageRedirect(@Req() request: RequestCoockie, @Res() res) {
@@ -44,36 +44,5 @@ export class AppController {
     });
 
     return { auth };
-  }
-
-  @Get('/users')
-  @Render('users')
-  async users(@Req() request: RequestCoockie) {
-    const UsersExport = await this.appService.getUsers();
-    let token = '';
-    if (request.cookies && request.cookies.token) token = request.cookies.token;
-    const auth = await this.appService.getUserByToken(token).catch((err) => {
-      return err;
-    });
-
-    return { UsersExport, auth };
-  }
-
-  @Get('/user/:id')
-  @Render('user')
-  async getUser(@Req() request: RequestCoockie, @Param('id') id: number) {
-    let token = '';
-    if (request.cookies && request.cookies.token) token = request.cookies.token;
-    const user = await this.appService.getUser(id, token);
-
-    const auth = await this.appService.getUserByToken(token).catch((err) => {
-      return err;
-    });
-
-    return {
-      user,
-      auth,
-      title: `${user.username} - `,
-    };
   }
 }

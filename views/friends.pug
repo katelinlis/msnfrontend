@@ -1,0 +1,25 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    link(rel="stylesheet" href="/css/index.css")
+    script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title MSN
+    style
+      include css/users.css
+    script
+      include js/users.js
+  body
+    .container(style="position: relative;background: #F8F5F5;height:800px;")
+      include include/header.pug
+      .content(style="position: absolute; ;background: #C4C4C4;height: auto;min-height: 700px;z-index:1")
+        div(style="text-align:center")
+          h3 <a href="./">Username</a>
+            span#countusers  count
+          #users
+
+
+
+
+      include include/navs.pug

@@ -26,7 +26,7 @@ type UserAuth = {
   auth: boolean;
 };
 @Injectable()
-export class AppService {
+export class UsersService {
   async getUserByToken(token: string): Promise<UserAuth> {
     if (token === '') {
       return {
