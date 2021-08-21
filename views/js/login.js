@@ -1,8 +1,8 @@
 function register() {
   axios
     .post('https://social.katelinlis.xyz/api/auth/login', {
-      username: document.getElementById('username').value,
-      password: document.getElementById('password').value,
+      username: document.getElementById('InputUsername').value,
+      password: document.getElementById('InputPassword').value,
     })
     .then(function (response) {
       if (response.data && response.data.token)
