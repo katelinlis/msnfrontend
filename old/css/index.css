@@ -24,33 +24,3 @@ body {
     width: 80vw;
   }
 }
-
-@media screen and (orientation: portrait){
-  .container{
-    width: 100vw;
-    left: 0;
-  }
-  .content{
-    position: relative;
-    margin: 0 auto;
-  }
-  #username{
-    display: block;
-    padding: 0;
-    text-align: center;
-  }
-  #avatarPhoto{
-    width: 40vw;
-    height: 40vw;
-    margin: 0 auto 20px auto;
-    display: block;
-  }
-  #friendRequestAndSendMessage{
-    width: 150px;
-    margin: 0 auto;
-  }
-  .friends{
-    width: 75vw;
-    margin: 20px auto 20px auto;
-  }
-}
