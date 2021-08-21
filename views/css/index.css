@@ -18,6 +18,10 @@ body {
   height: 240px;
 }
 
+#avatarPhoto{
+  object-fit: cover;
+}
+
 @media only screen and (max-width: 768px) {
   .content {
     left: 10%;
