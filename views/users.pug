@@ -13,7 +13,7 @@ html(lang="en")
   body
     .container(style="position: relative;background: #F8F5F5;height:800px;")
       include include/header.pug
-      .content(style="position: absolute; ;background: #C4C4C4;height:700px;z-index:1")
+      .content(style="position: absolute; ;background: #C4C4C4;height: auto;min-height: 700px;z-index:1")
         div(style="text-align:center")
           h3 Users
             span#countusers (#{UsersExport.total})
