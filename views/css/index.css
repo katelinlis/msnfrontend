@@ -45,6 +45,16 @@ body {
 }
 
 @media screen and (orientation: portrait) {
+#aboutblock{
+
+  width:180px;
+  position: relative;
+  left: unset;
+  top: unset;
+}
+#aboutblock > div {
+   width:290px;
+}
   .container {
     width: 100vw;
     left: 0;

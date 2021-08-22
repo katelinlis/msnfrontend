@@ -1,24 +1,44 @@
 extends layout.pug
 block content
   .content
-    span#username #{user.username}
-    br
-    div#AvatarBox(onmouseout="mouseleave(event)" onmouseover="mouseover(event)")
-      #changeAvatarButton
-        span#ChangeAvatarButton(onclick="document.getElementById('avatarUpload').click()") change avatar
-        input#avatarUpload(style="display: none;" onchange="Upload()" type="file" accept="image/jpeg,image/png")
-      if user.avatar
-        img#avatarPhoto(alt="user avatar" src=`https://social.katelinlis.xyz/api/static/${user.id}/${user.avatar}`)
-      else
-        img#avatarPhoto(alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
-    if user.me
-      #EditUser
-        button(style="width:150px") Обновить информацию
-    else
-      #friendRequestAndSendMessage
-        button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") Friend request
+    div
+      div(style="display: inline-block;")
+        span#username #{user.username}
         br
-        button(style="width:150px") Send Message
+        div#AvatarBox(onmouseout="mouseleave(event)" onmouseover="mouseover(event)")
+          #changeAvatarButton
+            span#ChangeAvatarButton(onclick="document.getElementById('avatarUpload').click()") change avatar
+            input#avatarUpload(style="display: none;" onchange="Upload()" type="file" accept="image/jpeg,image/png")
+          if user.avatar
+            img#avatarPhoto(alt="user avatar" src=`https://social.katelinlis.xyz/api/static/${user.id}/${user.avatar}`)
+          else
+            img#avatarPhoto(alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
+        if user.me
+          #EditUser
+            button(style="width:150px") Обновить информацию
+        else
+          #friendRequestAndSendMessage
+            button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") Friend request
+            br
+            button(style="width:150px") Send Message
+      div#aboutblock
+        span about
+        div
+          div
+            div Имя
+            div(style="margin-left: 20px;")  Кейтлин лис
+          div
+            div Возраст
+            div(style="margin-left: 20px;")  22 года
+          div
+            div Местоимения
+            div(style="margin-left: 20px;")  она, ей
+          div
+            div Откуда
+            div(style="margin-left: 20px;")  Шахты, Россия
+          div
+            div bio
+            div(style="margin-left: 20px;")  Программист, увлекается просмотром аниме, косплеем и прогулками в хорошей компании...
     .friends
       div(style="margin-left:8px")
         span#FriendsTitle

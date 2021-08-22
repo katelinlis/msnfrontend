@@ -58,6 +58,19 @@
 
 }
 
+#aboutblock{
+  display: inline-block;
+  width:300px;
+  position: relative;
+  left: 54vh;
+  top: -5vh;
+}
+
+#aboutblock > div {
+   width:300px;
+   background-color:white;
+}
+
 #changeAvatarButton{
   background: #80808069;
   width: 240px;
