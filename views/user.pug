@@ -43,26 +43,16 @@ block content
       div(style="margin-left:8px")
         span#FriendsTitle
           a(href=`/user/${user.id}/friends` style="text-decoration: unset;color: #000000;") Friends
-        span#count_friends #{user.friends}
+        span#count_friends  #{user.friends.count}
         div
-          span#friend
-            img(src="/friendImg.svg")
-            span user
-          span#friend
-            img(src="/friendImg.svg")
-            span user
-          span#friend
-            img(src="/friendImg.svg")
-            span user
-          span#friend
-            img(src="/friendImg.svg")
-            span user
-          span#friend
-            img(src="/friendImg.svg")
-            span user
-          span#friend
-            img(src="/friendImg.svg")
-            span user
+          each friend,index in user.friends.list
+            span#friend
+              a(href=`/user/${friend.id}`)
+                if friend.avatar
+                  img(height="25px" width="25px" style=`border-radius: 100%;${index===0 ? '':'margin-left:5px'}` src=`https://social.katelinlis.xyz/api/static/${friend.id}/${friend.avatar}`)
+                else
+                  img(height="25px" width="25px" style=`border-radius: 100%;${index===0 ? '':'margin-left:5px'}`  alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
+                span(style="font-size:14px;width:30px") #{friend.username}
 block scripts
   style
     include css/user.css

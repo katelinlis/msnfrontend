@@ -61,4 +61,21 @@ export class UsersController {
       title: `${user.username} - `,
     };
   }
+  @Get('/settings')
+  @Render('settings')
+  async userSettings(@Req() request: RequestCoockie, @Param('id') id: number) {
+    let token = '';
+    if (request.cookies && request.cookies.token) token = request.cookies.token;
+    const user = await this.appService.getUser(id, token);
+
+    const auth = await this.appService.getUserByToken(token).catch((err) => {
+      return err;
+    });
+
+    return {
+      user,
+      auth,
+      title: `${user.username} - `,
+    };
+  }
 }

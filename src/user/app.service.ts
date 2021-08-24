@@ -1,36 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { UserAuth, userExtend, UsersExport } from './app.type.js';
 
-type user = {
-  id: number;
-  username: string;
-  me: boolean;
-  friends: number;
-  avatar: string;
-};
-
-type ArrayUser = [
-  {
-    id: number;
-    username: string;
-    avatar: string;
-  },
-];
-
-type UsersExport = {
-  users: ArrayUser;
-  total: number;
-};
-type UserAuth = {
-  user: user;
-  auth: boolean;
-};
 @Injectable()
 export class UsersService {
   async getUserByToken(token: string): Promise<UserAuth> {
     if (token === '') {
       return {
-        user: { id: 0, username: '', me: false, friends: 0, avatar: '' },
+        user: { id: 0, username: '', avatar: '' },
         auth: false,
       };
     }
@@ -51,14 +28,12 @@ export class UsersService {
       user: {
         id: user.user.id,
         username: user.user.username,
-        friends: user.user.friends,
         avatar: user.user.avatar,
-        me: user.user.me,
       },
       auth: true,
     };
   }
-  async getUser(id: number, token: string): Promise<user> {
+  async getUser(id: number, token: string): Promise<userExtend> {
     const response = await axios.get(
       'https://social.katelinlis.xyz/api/user/get/' + id,
       { headers: { authorization: 'beaber ' + token } },
