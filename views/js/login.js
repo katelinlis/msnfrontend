@@ -31,5 +31,5 @@ setTimeout(() => {
   document.getElementById('InputUsername').value =
     window.localStorage.getItem('InputUsername');
   document.getElementById('InputPassword').value =
-    window.localStorage.getItem('InputUsername');
+    window.localStorage.getItem('InputPassword');
 }, 200);
