@@ -6,6 +6,10 @@ export interface User {
 
 export interface userExtend extends User {
   me: boolean;
+  friend_status: {
+    forme: boolean;
+    status: number;
+  };
   friends: {
     list: [User];
     count: number;

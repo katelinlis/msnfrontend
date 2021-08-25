@@ -46,6 +46,7 @@ export class UsersService {
       friends: user.user.friends,
       avatar: user.user.avatar,
       me: user.user.me,
+      friend_status: user.friend_status,
     };
   }
   async getUsers(): Promise<UsersExport> {

@@ -5,21 +5,36 @@ block content
       div(style="display: inline-block;")
         span#username #{user.username}
         br
-        div#AvatarBox(onmouseout="mouseleave(event)" onmouseover="mouseover(event)")
-          if user.me
+        if user.me
+          div#AvatarBox(onmouseout="mouseleave(event)" onmouseover="mouseover(event)")
+            if user.avatar
+              img#avatarPhoto(alt="user avatar" src=`https://social.katelinlis.xyz/api/static/${user.id}/${user.avatar}`)
+            else
+              img#avatarPhoto(alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
+            script
+              include js/userChangePhoto.js
             #changeAvatarButton
               span#ChangeAvatarButton(onclick="document.getElementById('avatarUpload').click()") change avatar
               input#avatarUpload(style="display: none;" onchange="Upload()" type="file" accept="image/jpeg,image/png")
-          if user.avatar
-            img#avatarPhoto(alt="user avatar" src=`https://social.katelinlis.xyz/api/static/${user.id}/${user.avatar}`)
-          else
-            img#avatarPhoto(alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
+        else
+          div#AvatarBox
+            if user.avatar
+              img#avatarPhoto(alt="user avatar" src=`https://social.katelinlis.xyz/api/static/${user.id}/${user.avatar}`)
+            else
+              img#avatarPhoto(alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
         if user.me
           #EditUser
             button(style="width:150px") Обновить информацию
         else
           #friendRequestAndSendMessage
-            button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") Friend request
+            if user.friend_status.status === 1
+              button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") remove from friends
+            else if user.friend_status.status === 0 && user.friend_status.forme
+              button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") Accept request
+            else if user.friend_status.status === 0 && !user.friend_status.forme
+              button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") Cancel request
+            else
+              button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") Friend request
             br
             button(style="width:150px") Send Message
       div#aboutblock
