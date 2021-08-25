@@ -47,13 +47,14 @@ block content
         span#count_friends  #{user.friends.count}
         div
           each friend,index in user.friends.list
-            span#friend
-              a(href=`/user/${friend.id}`)
-                if friend.avatar
-                  img(height="30px" width="30px" style=`border-radius: 100%;` src=`https://social.katelinlis.xyz/api/static/${friend.id}/${friend.avatar}`)
-                else
-                  img(height="30px" width="30px" style=`border-radius: 100%;`  alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
-                span(style="font-size:14px;width:30px") #{friend.username.slice(0,6)}..
+            if index <4
+              span#friend
+                a(href=`/user/${friend.id}`)
+                  if friend.avatar
+                    img(height="30px" width="30px" style=`border-radius: 100%;` src=`https://social.katelinlis.xyz/api/static/${friend.id}/${friend.avatar}`)
+                  else
+                    img(height="30px" width="30px" style=`border-radius: 100%;`  alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
+                  span(style="font-size:14px;width:30px") #{friend.username.slice(0,6)}..
 block scripts
   style
     include css/user.css
