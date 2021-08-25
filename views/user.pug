@@ -50,9 +50,9 @@ block content
             span#friend
               a(href=`/user/${friend.id}`)
                 if friend.avatar
-                  img(height="30px" width="30px" style=`border-radius: 100%;${index===0 ? '':'margin-left:5px'}` src=`https://social.katelinlis.xyz/api/static/${friend.id}/${friend.avatar}`)
+                  img(height="30px" width="30px" style=`border-radius: 100%;` src=`https://social.katelinlis.xyz/api/static/${friend.id}/${friend.avatar}`)
                 else
-                  img(height="30px" width="30px" style=`border-radius: 100%;${index===0 ? '':'margin-left:5px'}`  alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
+                  img(height="30px" width="30px" style=`border-radius: 100%;`  alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
                 span(style="font-size:14px;width:30px") #{friend.username.slice(0,6)}..
 block scripts
   style
