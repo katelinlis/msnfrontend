@@ -39,7 +39,12 @@
 #friend{
   width: 27px;
   display: inline-block;
-  margin-right:5px
+  margin-right:7px
+}
+
+#friend > a {
+  text-decoration: unset;
+  color: gray;
 }
 
 #FriendsTitle{

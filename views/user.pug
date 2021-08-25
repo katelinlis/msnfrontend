@@ -6,9 +6,10 @@ block content
         span#username #{user.username}
         br
         div#AvatarBox(onmouseout="mouseleave(event)" onmouseover="mouseover(event)")
-          #changeAvatarButton
-            span#ChangeAvatarButton(onclick="document.getElementById('avatarUpload').click()") change avatar
-            input#avatarUpload(style="display: none;" onchange="Upload()" type="file" accept="image/jpeg,image/png")
+          if user.me
+            #changeAvatarButton
+              span#ChangeAvatarButton(onclick="document.getElementById('avatarUpload').click()") change avatar
+              input#avatarUpload(style="display: none;" onchange="Upload()" type="file" accept="image/jpeg,image/png")
           if user.avatar
             img#avatarPhoto(alt="user avatar" src=`https://social.katelinlis.xyz/api/static/${user.id}/${user.avatar}`)
           else
@@ -49,10 +50,10 @@ block content
             span#friend
               a(href=`/user/${friend.id}`)
                 if friend.avatar
-                  img(height="25px" width="25px" style=`border-radius: 100%;${index===0 ? '':'margin-left:5px'}` src=`https://social.katelinlis.xyz/api/static/${friend.id}/${friend.avatar}`)
+                  img(height="30px" width="30px" style=`border-radius: 100%;${index===0 ? '':'margin-left:5px'}` src=`https://social.katelinlis.xyz/api/static/${friend.id}/${friend.avatar}`)
                 else
-                  img(height="25px" width="25px" style=`border-radius: 100%;${index===0 ? '':'margin-left:5px'}`  alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
-                span(style="font-size:14px;width:30px") #{friend.username}
+                  img(height="30px" width="30px" style=`border-radius: 100%;${index===0 ? '':'margin-left:5px'}`  alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
+                span(style="font-size:14px;width:30px") #{friend.username.slice(0,6)}..
 block scripts
   style
     include css/user.css
