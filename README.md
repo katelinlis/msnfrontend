@@ -47,4 +47,6 @@ https://www.buymeacoffee.com/katelinlis
 ## Stay in touch
 
 - Author - [Katelinlis](https://vk.com/katelinlis)
+## Stars
 
+![Stargazers over time](https://starchart.cc/katelinlis/msnfrontend.svg)
