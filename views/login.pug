@@ -2,13 +2,16 @@ extends layout.pug
 block content
   .content(style="position: absolute; ;background: #C4C4C4;height:700px;z-index:1")
     div(style="text-align:center")
+      label(for="InputUsername") Имя пользователя
       div
-        label(for="InputUsername") Username
         input#InputUsername
+      label(for="InputPassword") Пароль
       div
-        label(for="InputPassword") Password
         input#InputPassword(type="password")
       div
+        label(for="SavePassword") Сохранить пароль?
+        input#SavePassword(type="checkbox")
+      div(style="margin-top: 15px;")
         input(type="button", onclick="register()" value="войти или создать аккаунт")
 block scripts
   script
