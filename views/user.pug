@@ -22,21 +22,22 @@ block content
               img#avatarPhoto(alt="user avatar" src=`https://social.katelinlis.xyz/api/static/${user.id}/${user.avatar}`)
             else
               img#avatarPhoto(alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
-        if user.me
-          #EditUser
-            button(style="width:150px") Обновить информацию
-        else
-          #friendRequestAndSendMessage
-            if user.friend_status.status === 1
-              button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") remove from friends
-            else if user.friend_status.status === 0 && user.friend_status.forme
-              button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") Accept request
-            else if user.friend_status.status === 0 && !user.friend_status.forme
-              button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") Cancel request
-            else
-              button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") Friend request
-            br
-            button(style="width:150px") Send Message
+        if auth.auth
+          if user.me
+            #EditUser
+              button(style="width:150px") Обновить информацию
+          else
+            #friendRequestAndSendMessage
+              if user.friend_status.status === 1
+                button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") remove from friends
+              else if user.friend_status.status === 0 && user.friend_status.forme
+                button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") Accept request
+              else if user.friend_status.status === 0 && !user.friend_status.forme
+                button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") Cancel request
+              else
+                button#ButtonSendRequestFriend(onclick="request_friend()" style="width:150px") Friend request
+              br
+              button(style="width:150px") Send Message
       div#aboutblock
         span about
         div
