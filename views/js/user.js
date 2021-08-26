@@ -1,8 +1,11 @@
 let friend_status;
 let this_user;
+let userid;
 let token = localStorage.getItem('token');
 //if local 27, if social.katelinlis then 35
-let userid = window.location.href.slice(35);
+if (window.location.href.slice(0, 8) === 'https://')
+  userid = window.location.href.slice(35);
+else userid = window.location.href.slice(27);
 //let userid = window.location.href.slice(35);
 let headers = {};
 if (token) headers['Authorization'] = `Bearer ${token}`;
