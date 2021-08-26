@@ -3,7 +3,7 @@ import axios from 'axios';
 import { UserAuth, userExtend, UsersExport } from './app.type.js';
 let server_url;
 if (process.env.NODE_ENV == 'production')
-  server_url = 'http://127.0.0.1:3044/api';
+  server_url = 'http://localhost:3044/api';
 else server_url = 'https://social.katelinlis.xyz/api';
 
 @Injectable()
