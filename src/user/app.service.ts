@@ -52,7 +52,7 @@ export class UsersService {
     };
   }
   async getUsers(): Promise<UsersExport> {
-    const response = await axios.get(`${server_url}/api/user/get/`);
+    const response = await axios.get(`${server_url}/user/get/`);
     const user = response.data;
 
     return { users: user.users, total: user.total };
