@@ -1,4 +1,13 @@
-import { Controller, Get, Res, Param, Req, Request } from '@nestjs/common';
+import { Response } from 'express';
+import {
+  Controller,
+  Get,
+  Res,
+  Param,
+  Req,
+  Request,
+  HttpException,
+} from '@nestjs/common';
 import { UsersService } from './app.service';
 import { Render } from '@nestjs/common';
 
@@ -27,18 +36,29 @@ export class UsersController {
   @Render('user')
   async getUser(
     @Req() request: RequestCoockie,
-    @Res() res,
+    @Res() res: Response,
     @Param('id') id: number,
   ) {
     let token = '';
     if (request.cookies && request.cookies.token) token = request.cookies.token;
-    const user = await this.appService.getUser(id, token);
+
+    const user = await this.appService
+      .getUser(id, token)
+      .catch((status: number) => {
+        if (status == 404) {
+          res.status(404);
+          res.send('404');
+          throw 404;
+        }
+      });
+    console.log(typeof user);
 
     const auth = await this.appService
       .getUserByToken(token)
       .catch((status: number) => {
         if (status == 401) {
-          res.clearCookie();
+          //res.clearCookie();
+          res.clearCookie('token');
           res.redirect('/login');
         }
       });
@@ -46,7 +66,7 @@ export class UsersController {
     return {
       user,
       auth,
-      title: `${user.username} - `,
+      title: `${user && user.username} - `,
     };
   }
 
@@ -68,7 +88,7 @@ export class UsersController {
       })
       .catch((status: number) => {
         if (status == 401) {
-          res.clearCookie();
+          res.clearCookie('token');
           res.redirect('/login');
         }
       });
@@ -97,7 +117,7 @@ export class UsersController {
       })
       .catch((status: number) => {
         if (status == 401) {
-          res.clearCookie();
+          res.clearCookie('token');
           res.redirect('/login');
         }
       });

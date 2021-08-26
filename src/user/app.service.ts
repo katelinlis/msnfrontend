@@ -21,7 +21,7 @@ export class UsersService {
         headers: { authorization: 'beaber ' + token },
       })
       .then((response) => {
-        return response.data;
+        if (response) return response.data;
       })
       .catch((err) => {
         if (err.response.status === 401) throw 401;
@@ -47,10 +47,12 @@ export class UsersService {
         headers: { authorization: 'beaber ' + token },
       })
       .then((response) => {
-        return response.data;
+        if (response) return response.data;
+        return response;
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response.status === 404) throw 404;
+        return {};
       });
     const user = response;
 
@@ -67,7 +69,7 @@ export class UsersService {
     const usersExport = await axios
       .get(`${server_url}/user/get/`)
       .then((response) => {
-        return response.data;
+        if (response) return response.data;
       })
       .catch((err) => {
         console.log(err);
