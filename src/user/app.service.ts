@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { response } from 'express';
 import { UserAuth, userExtend, UsersExport } from './app.type.js';
 let server_url;
 if (process.env.NODE_ENV == 'production')
@@ -19,13 +20,17 @@ export class UsersService {
       .get(`${server_url}/auth/user/`, {
         headers: { authorization: 'beaber ' + token },
       })
-      .catch(() => {
-        throw {
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        if (err.response.status === 401) throw 401;
+        return {
           user: { id: 0, username: '', me: false, friends: 0, avatar: '' },
           auth: false,
         };
       });
-    const user = response.data;
+    const user = response;
 
     return {
       user: {
@@ -37,10 +42,17 @@ export class UsersService {
     };
   }
   async getUser(id: number, token: string): Promise<userExtend> {
-    const response = await axios.get(`${server_url}/user/get/` + id, {
-      headers: { authorization: 'beaber ' + token },
-    });
-    const user = response.data;
+    const response = await axios
+      .get(`${server_url}/user/get/` + id, {
+        headers: { authorization: 'beaber ' + token },
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    const user = response;
 
     return {
       id: user.user.id,
@@ -52,9 +64,15 @@ export class UsersService {
     };
   }
   async getUsers(): Promise<UsersExport> {
-    const response = await axios.get(`${server_url}/user/get/`);
-    const user = response.data;
+    const usersExport = await axios
+      .get(`${server_url}/user/get/`)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    return { users: user.users, total: user.total };
+    return usersExport;
   }
 }

@@ -25,14 +25,23 @@ export class UsersController {
 
   @Get('/user/:id')
   @Render('user')
-  async getUser(@Req() request: RequestCoockie, @Param('id') id: number) {
+  async getUser(
+    @Req() request: RequestCoockie,
+    @Res() res,
+    @Param('id') id: number,
+  ) {
     let token = '';
     if (request.cookies && request.cookies.token) token = request.cookies.token;
     const user = await this.appService.getUser(id, token);
 
-    const auth = await this.appService.getUserByToken(token).catch((err) => {
-      return err;
-    });
+    const auth = await this.appService
+      .getUserByToken(token)
+      .catch((status: number) => {
+        if (status == 401) {
+          res.clearCookie();
+          res.redirect('/login');
+        }
+      });
 
     return {
       user,
@@ -45,15 +54,24 @@ export class UsersController {
   @Render('friends')
   async getUserFriends(
     @Req() request: RequestCoockie,
+    @Res() res,
     @Param('id') id: number,
   ) {
     let token = '';
     if (request.cookies && request.cookies.token) token = request.cookies.token;
     const user = await this.appService.getUser(id, token);
 
-    const auth = await this.appService.getUserByToken(token).catch((err) => {
-      return err;
-    });
+    const auth = await this.appService
+      .getUserByToken(token)
+      .catch((err) => {
+        return err;
+      })
+      .catch((status: number) => {
+        if (status == 401) {
+          res.clearCookie();
+          res.redirect('/login');
+        }
+      });
 
     return {
       user,
@@ -63,14 +81,26 @@ export class UsersController {
   }
   @Get('/settings')
   @Render('settings')
-  async userSettings(@Req() request: RequestCoockie, @Param('id') id: number) {
+  async userSettings(
+    @Req() request: RequestCoockie,
+    @Res() res,
+    @Param('id') id: number,
+  ) {
     let token = '';
     if (request.cookies && request.cookies.token) token = request.cookies.token;
     const user = await this.appService.getUser(id, token);
 
-    const auth = await this.appService.getUserByToken(token).catch((err) => {
-      return err;
-    });
+    const auth = await this.appService
+      .getUserByToken(token)
+      .catch((err) => {
+        return err;
+      })
+      .catch((status: number) => {
+        if (status == 401) {
+          res.clearCookie();
+          res.redirect('/login');
+        }
+      });
 
     return {
       user,

@@ -14,9 +14,17 @@ export class MainController {
   async MainPageRedirect(@Req() request: RequestCoockie, @Res() res) {
     let token = '';
     if (request.cookies && request.cookies.token) token = request.cookies.token;
-    const auth = await this.appService.getUserByToken(token).catch((err) => {
-      return err;
-    });
+    const auth = await this.appService
+      .getUserByToken(token)
+      .catch((err) => {
+        return err;
+      })
+      .catch((status: number) => {
+        if (status == 401) {
+          res.clearCookie();
+          res.redirect('/login');
+        }
+      });
     const userAuth = auth.auth;
     if (!userAuth) res.redirect('/login');
     else res.redirect('/news');
@@ -24,12 +32,20 @@ export class MainController {
 
   @Get('/news')
   @Render('news')
-  async News(@Req() request: RequestCoockie) {
+  async News(@Req() request: RequestCoockie, @Res() res) {
     let token = '';
     if (request.cookies && request.cookies.token) token = request.cookies.token;
-    const auth = await this.appService.getUserByToken(token).catch((err) => {
-      return err;
-    });
+    const auth = await this.appService
+      .getUserByToken(token)
+      .catch((err) => {
+        return err;
+      })
+      .catch((status: number) => {
+        if (status == 401) {
+          res.clearCookie();
+          res.redirect('/login');
+        }
+      });
 
     return { auth };
   }
