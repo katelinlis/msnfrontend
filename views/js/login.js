@@ -7,7 +7,8 @@ function register() {
     grecaptcha.ready(function () {
       grecaptcha
         .execute('6LfyLyIcAAAAALaiGsWJhlGVavDKRU-2BWmtkzaE', {
-          action: 'submit',
+          action: 'auth',
+          user: username,
         })
         .then(function (recaptcha) {
           axios

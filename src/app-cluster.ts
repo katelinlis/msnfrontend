@@ -13,7 +13,7 @@ export class ClusterService {
     if (this.cluster.isMaster) {
       console.log(`Master server started on ${process.pid}`);
       this.SIGINT();
-      this.Cluster(callback);
+      this.Cluster();
 
       const cpus = os.cpus().length;
       if (workers > cpus) workers = cpus;
@@ -25,12 +25,11 @@ export class ClusterService {
       callback();
     }
   }
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  private Cluster(callback: Function) {
+  private Cluster() {
     this.cluster.on('online', function (worker) {
       console.log('Worker %s is online', worker.process.pid);
     });
-    this.cluster.on('exit', (worker, code, signal) => {
+    this.cluster.on('exit', (worker) => {
       console.log(`Worker ${worker.process.pid} died. Restarting`);
       this.cluster.fork();
     });
