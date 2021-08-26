@@ -1,5 +1,4 @@
 import * as cluster from 'cluster';
-import { Cluster } from 'cluster';
 import * as os from 'os';
 import { Injectable } from '@nestjs/common';
 
@@ -22,6 +21,8 @@ export class ClusterService {
       for (let i = 0; i < workers; i++) {
         this.cluster.fork();
       }
+    } else {
+      callback();
     }
   }
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -33,7 +34,6 @@ export class ClusterService {
       console.log(`Worker ${worker.process.pid} died. Restarting`);
       this.cluster.fork();
     });
-    callback();
   }
   private SIGINT() {
     //ensure workers exit cleanly
