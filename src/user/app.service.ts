@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { UserAuth, userExtend, UsersExport } from './app.type.js';
+let server_url;
+if (process.env.NODE_ENV == 'production')
+  server_url = 'http://127.0.0.1:3044/api';
+else server_url = 'https://social.katelinlis.xyz/api';
 
 @Injectable()
 export class UsersService {
@@ -11,9 +15,8 @@ export class UsersService {
         auth: false,
       };
     }
-
     const response = await axios
-      .get('https://social.katelinlis.xyz/api/auth/user/', {
+      .get(`${server_url}/auth/user/`, {
         headers: { authorization: 'beaber ' + token },
       })
       .catch(() => {
@@ -34,10 +37,9 @@ export class UsersService {
     };
   }
   async getUser(id: number, token: string): Promise<userExtend> {
-    const response = await axios.get(
-      'https://social.katelinlis.xyz/api/user/get/' + id,
-      { headers: { authorization: 'beaber ' + token } },
-    );
+    const response = await axios.get(`${server_url}/user/get/` + id, {
+      headers: { authorization: 'beaber ' + token },
+    });
     const user = response.data;
 
     return {
@@ -50,9 +52,7 @@ export class UsersService {
     };
   }
   async getUsers(): Promise<UsersExport> {
-    const response = await axios.get(
-      'https://social.katelinlis.xyz/api/user/get/',
-    );
+    const response = await axios.get(`${server_url}/api/user/get/`);
     const user = response.data;
 
     return { users: user.users, total: user.total };
