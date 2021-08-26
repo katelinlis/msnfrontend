@@ -15,7 +15,7 @@ block content
               include js/userChangePhoto.js
             #changeAvatarButton
               span#ChangeAvatarButton(onclick="document.getElementById('avatarUpload').click()") change avatar
-              input#avatarUpload(style="display: none;" onchange="Upload()" type="file" accept="image/jpeg,image/png")
+              input#avatarUpload(style="display: none;" onchange="Upload()" type="file" accept=".jpg, .jpeg, .png" size="5000000")
         else
           div#AvatarBox
             if user.avatar
