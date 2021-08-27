@@ -4,39 +4,35 @@ function register() {
   let savePassword = document.getElementById('SavePassword').value;
   console.log(savePassword);
   if (username && password)
-    grecaptcha.ready(function () {
-      grecaptcha
-        .execute('6LfyLyIcAAAAALaiGsWJhlGVavDKRU-2BWmtkzaE', {
-          action: 'submit',
-          username: username,
-        })
-        .then(function (recaptcha) {
-          axios
-            .post('https://social.katelinlis.xyz/api/auth/login', {
-              username,
-              password,
-              recaptcha,
-            })
-            .then(function (response) {
-              if (response.data && response.data.token) {
-                window.localStorage.setItem('InputUsername', username);
-                if (savePassword === 'on') {
-                  window.localStorage.setItem('InputPassword', password);
-                }
-                window.localStorage.setItem('token', response.data.token);
-                setCookie('token', response.data.token);
-                document.location.href =
-                  'https://social.katelinlis.xyz/user/' + response.data.userid;
-              }
-              console.log(response);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        });
-    });
+    axios
+      .post('https://social.katelinlis.xyz/api/auth/login', {
+        username,
+        password,
+        captcha: grecaptcha.getResponse(captcha),
+      })
+      .then(function (response) {
+        if (response.data && response.data.token) {
+          window.localStorage.setItem('InputUsername', username);
+          if (savePassword === 'on') {
+            window.localStorage.setItem('InputPassword', password);
+          }
+          window.localStorage.setItem('token', response.data.token);
+          setCookie('token', response.data.token);
+          document.location.href =
+            'https://social.katelinlis.xyz/user/' + response.data.userid;
+        }
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 }
-
+let captcha;
+var onloadCallback = function () {
+  captcha = grecaptcha.render('captcha', {
+    sitekey: '6LeM-igcAAAAAJNQUHNOzpAH1jzTgruIMcjtUTsJ',
+  });
+};
 setTimeout(() => {
   console.log('ddd');
   document.getElementById('InputUsername').value =
