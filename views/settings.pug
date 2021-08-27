@@ -1,0 +1,44 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    link(rel="stylesheet" href="/css/index.css")
+    script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title MSN
+    style
+      include css/settings.css
+    script
+      include js/users.js
+  body
+    .container(style="position: relative;background: #F8F5F5;height:800px;")
+      include include/header.pug
+      .content(style="position: absolute; ;background: #C4C4C4;height: auto;min-height: 700px;z-index:1")
+        div(style="text-align:center")
+          h3
+            a(href=`/user/${auth.user.id}`) back
+          div#settings
+            label(for="") Имя
+            input(type="text")
+            br
+            label(for="") Фамилия
+            input(type="text")
+            br
+            label(for="") Возраст
+            input(type="number")
+            br
+            label(for="") Местоимения
+            input(type="text")
+            br
+            label(for="") Откуда вы
+            input(type="text")
+            br
+            label(for="") Расскажите о себе
+            textarea(type="text")
+
+
+
+
+
+
+      include include/navs.pug

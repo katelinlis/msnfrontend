@@ -1,0 +1,19 @@
+div#settings > label {
+  position: relative;
+  margin-top: 10px;
+  text-align: left;
+  width: 30px;
+}
+div#settings > input {
+  text-align: right;
+   width: 30%;
+}
+div#settings > textarea {
+  text-align: right;
+   width: 30%;
+}
+
+#settings{
+      text-align-last: end;
+  width: 60%;
+}

@@ -1,12 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import { response } from 'express';
+import * as redis from 'redis';
 import { UserAuth, userExtend, UsersExport } from './app.type.js';
 let server_url;
 if (process.env.NODE_ENV == 'production')
   server_url = 'http://localhost:3044/api';
 else server_url = 'https://social.katelinlis.xyz/api';
-
+const clientRedis = redis.createClient();
+clientRedis.on('error', function (error) {
+  console.error(error);
+});
 @Injectable()
 export class UsersService {
   async getUserByToken(token: string): Promise<UserAuth> {
@@ -41,30 +44,50 @@ export class UsersService {
       auth: true,
     };
   }
+  async getFromRedis(request): Promise<userExtend> {
+    return new Promise((resolve, reject) => {
+      clientRedis.get(request, function (err, res) {
+        if (err) reject(err);
+        if (res) resolve(JSON.parse(res));
+        else reject(false);
+      });
+    });
+  }
   async getUser(id: number, token: string): Promise<userExtend> {
+    let response = await this.getFromRedis('userget/' + id + '' + token);
+    if (!response) {
+      response = await this.requestUserServer(id, token);
+      await clientRedis.set(
+        'userget/' + id + '' + token,
+        JSON.stringify(response),
+      );
+    }
+
+    const user = response;
+
+    return user;
+  }
+
+  async requestUserServer(id, token): Promise<userExtend> {
     const response = await axios
       .get(`${server_url}/user/get/` + id, {
-        headers: { authorization: 'beaber ' + token },
+        headers: { authorization: 'bearer ' + token },
       })
       .then((response) => {
-        if (response) return response.data;
+        if (response) {
+          const user = response.data.user;
+          user['friend_status'] = response.data.friend_status;
+          return user;
+        }
         return response;
       })
       .catch((err) => {
         if (err.response.status === 404) throw 404;
         return {};
       });
-    const user = response;
-
-    return {
-      id: user.user.id,
-      username: user.user.username,
-      friends: user.user.friends,
-      avatar: user.user.avatar,
-      me: user.user.me,
-      friend_status: user.friend_status,
-    };
+    return response;
   }
+
   async getUsers(): Promise<UsersExport> {
     const usersExport = await axios
       .get(`${server_url}/user/get/`)

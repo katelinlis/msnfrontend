@@ -83,15 +83,13 @@ export class UsersController {
 
     const auth = await this.appService
       .getUserByToken(token)
-      .catch((err) => {
-        return err;
-      })
       .catch((status: number) => {
         if (status == 401) {
           res.clearCookie('token');
           res.redirect('/login');
         }
       });
+
 
     return {
       user,
@@ -101,31 +99,20 @@ export class UsersController {
   }
   @Get('/settings')
   @Render('settings')
-  async userSettings(
-    @Req() request: RequestCoockie,
-    @Res() res,
-    @Param('id') id: number,
-  ) {
+  async userSettings(@Req() request: RequestCoockie, @Res() res) {
     let token = '';
     if (request.cookies && request.cookies.token) token = request.cookies.token;
-    const user = await this.appService.getUser(id, token);
 
-    const auth = await this.appService
-      .getUserByToken(token)
-      .catch((err) => {
-        return err;
-      })
-      .catch((status: number) => {
-        if (status == 401) {
-          res.clearCookie('token');
-          res.redirect('/login');
-        }
-      });
-
+    const auth = await this.appService.getUserByToken(token).catch((status) => {
+      if (status == 401) {
+        res.clearCookie('token');
+        res.redirect('/login');
+        throw 401;
+      }
+    });
     return {
-      user,
       auth,
-      title: `${user.username} - `,
+      title: `${auth && auth.user && auth.user.username} - `,
     };
   }
 }
