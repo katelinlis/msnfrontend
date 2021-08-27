@@ -48,24 +48,28 @@ export class UsersService {
     return new Promise((resolve, reject) => {
       clientRedis.get(request, function (err, res) {
         if (err) reject(err);
-        if (res) resolve(JSON.parse(res));
-        else reject(false);
+        if (res) {
+          resolve(JSON.parse(res));
+        } else {
+          reject(false);
+        }
       });
     });
   }
   async getUser(id: number, token: string): Promise<userExtend> {
-    let response = await this.getFromRedis('userget/' + id + '' + token);
-    if (!response) {
-      response = await this.requestUserServer(id, token);
+    const response = await this.getFromRedis(
+      'userget/' + id + '' + token,
+    ).catch(async (err) => {
+      const data_from_server = await this.requestUserServer(id, token);
       await clientRedis.set(
         'userget/' + id + '' + token,
-        JSON.stringify(response),
+        JSON.stringify(data_from_server),
       );
-    }
+      clientRedis.expire('userget/' + id + '' + token, 15);
+      return data_from_server;
+    });
 
-    const user = response;
-
-    return user;
+    return response;
   }
 
   async requestUserServer(id, token): Promise<userExtend> {
