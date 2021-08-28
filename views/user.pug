@@ -40,37 +40,59 @@ block content
               button(style="width:150px") Send Message
       div#aboutblock
         span about
-        div
+        div(style="min-height: 216px;")
           div
             div Имя
-            div(style="margin-left: 20px;")  Кейтлин лис
+            div(style="margin-left: 20px;") #{user.first_name} #{user.last_name}
           div
             div Возраст
-            div(style="margin-left: 20px;")  22 года
+            div(style="margin-left: 20px;") #{user.years} года
           div
             div Местоимения
-            div(style="margin-left: 20px;")  она, ей
+            div(style="margin-left: 20px;") #{user.pronouns}
           div
             div Откуда
-            div(style="margin-left: 20px;")  Шахты, Россия
+            div(style="margin-left: 20px;") #{user.user_location}
           div
             div bio
-            div(style="margin-left: 20px;")  Программист, увлекается просмотром аниме, косплеем и прогулками в хорошей компании...
+            div(style="margin-left: 20px;") #{user.bio}
     .friends
       div(style="margin-left:8px")
         span#FriendsTitle
           a(href=`/user/${user.id}/friends` style="text-decoration: unset;color: #000000;") Friends
-        span#count_friends  #{user.friends.count}
+        span#count_friends  #{user.friends && user.friends.count}
         div
-          each friend,index in user.friends.list
-            if index <4
-              span#friend
-                a(href=`/user/${friend.id}`)
-                  if friend.avatar
-                    img(height="30px" width="30px" style=`border-radius: 100%;` src=`https://social.katelinlis.xyz/api/static/${friend.id}/${friend.avatar}`)
-                  else
-                    img(height="30px" width="30px" style=`border-radius: 100%;`  alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
-                  span(style="font-size:14px;width:30px") #{friend.username.slice(0,6)}..
+          if user.friends
+            each friend,index in user.friends.list
+              if index <4
+                span#friend
+                  a(href=`/user/${friend.id}`)
+                    if friend.avatar
+                      img(height="30px" width="30px" style=`border-radius: 100%;` src=`https://social.katelinlis.xyz/api/static/${friend.id}/${friend.avatar}`)
+                    else
+                      img(height="30px" width="30px" style=`border-radius: 100%;`  alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
+                    span(style="font-size:14px;width:30px") #{friend.username.slice(0,6)}..
+      div#wall
+        span wall
+        div
+          div
+            textarea(name="" style="width:83%; max-width:83%; max-height:50px")
+            button send
+          div
+            div  username
+              span  27.08.2021
+            div Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo nostrum, corrupti nisi doloremque debitis quod! Voluptate pariatur ullam ipsam aperiam aliquam debitis. Quo veritatis distinctio vitae libero cupiditate accusamus neque?
+          br
+          div
+            div  username
+              span  27.08.2021
+            div Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo nostrum, corrupti nisi doloremque debitis quod! Voluptate pariatur ullam ipsam aperiam aliquam debitis. Quo veritatis distinctio vitae libero cupiditate accusamus neque?
+          br
+          div
+            div  username
+              span  27.08.2021
+            div Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo nostrum, corrupti nisi doloremque debitis quod! Voluptate pariatur ullam ipsam aperiam aliquam debitis. Quo veritatis distinctio vitae libero cupiditate accusamus neque?
+
 block scripts
   style
     include css/user.css

@@ -63,6 +63,19 @@
 
 }
 
+#wall{
+  display: inline-block;
+  width:300px;
+  position: relative;
+  left: 79vh;
+  top: -10vh;
+}
+
+#wall > div {
+   width:300px;
+   background-color:white;
+}
+
 #aboutblock{
   display: inline-block;
   width:300px;
