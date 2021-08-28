@@ -16,4 +16,4 @@ async function bootstrap() {
 
 const cluster = new ClusterService();
 
-cluster.register(20, bootstrap);
+cluster.register(3, bootstrap);
