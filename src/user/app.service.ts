@@ -46,14 +46,16 @@ export class UsersService {
   }
   async getFromRedis(request): Promise<userExtend> {
     return new Promise((resolve, reject) => {
-      clientRedis.get(request, function (err, res) {
-        if (err) reject(err);
-        if (res) {
-          resolve(JSON.parse(res));
-        } else {
-          reject(false);
-        }
-      });
+      if (process.env.NODE_ENV == 'production')
+        clientRedis.get(request, function (err, res) {
+          if (err) reject(err);
+          if (res) {
+            resolve(JSON.parse(res));
+          } else {
+            reject(false);
+          }
+        });
+      else reject(false);
     });
   }
   async getUser(id: number, token: string): Promise<userExtend> {
@@ -61,11 +63,13 @@ export class UsersService {
       'userget/' + id + '' + token,
     ).catch(async (err) => {
       const data_from_server = await this.requestUserServer(id, token);
-      await clientRedis.set(
-        'userget/' + id + '' + token,
-        JSON.stringify(data_from_server),
-      );
-      clientRedis.expire('userget/' + id + '' + token, 15);
+      if (process.env.NODE_ENV == 'production') {
+        await clientRedis.set(
+          'userget/' + id + '' + token,
+          JSON.stringify(data_from_server),
+        );
+        clientRedis.expire('userget/' + id + '' + token, 15);
+      }
       return data_from_server;
     });
 
