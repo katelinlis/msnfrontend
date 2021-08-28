@@ -10,20 +10,22 @@ export class ClusterService {
   }
   // eslint-disable-next-line @typescript-eslint/ban-types
   public register(workers: number, callback: Function): void {
-    if (this.cluster.isMaster) {
-      console.log(`Master server started on ${process.pid}`);
-      this.SIGINT();
-      this.Cluster();
+    if (process.env.NODE_ENV == 'production')
+      if (this.cluster.isMaster) {
+        console.log(`Master server started on ${process.pid}`);
+        this.SIGINT();
+        this.Cluster();
 
-      const cpus = os.cpus().length;
-      if (workers > cpus) workers = cpus;
+        const cpus = os.cpus().length;
+        if (workers > cpus) workers = cpus;
 
-      for (let i = 0; i < workers; i++) {
-        this.cluster.fork();
+        for (let i = 0; i < workers; i++) {
+          this.cluster.fork();
+        }
+      } else {
+        callback();
       }
-    } else {
-      callback();
-    }
+    else callback();
   }
   private Cluster() {
     this.cluster.on('online', function (worker) {

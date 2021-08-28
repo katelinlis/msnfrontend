@@ -1,7 +1,7 @@
 <p align="center">
   <a href="http://social.katelinlis.xyz/" target="blank"><img src="https://social.katelinlis.xyz/img/Logo.svg" width="320" alt="MSN logo" /></a>
 </p>
-<p align="center">social network pet project </p>
+<p align="center">Social network pet project </p>
 
 ## Description
 Платформа <a href="http://social.katelinlis.xyz/" target="blank">рабочей</a> социальной сети, делается как портфолио
@@ -43,7 +43,7 @@ $ npm run test:cov
 ```
 
 ## Donate
-support 
+support
 https://www.buymeacoffee.com/katelinlis
 
 ## Stay in touch
