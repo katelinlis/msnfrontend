@@ -6,10 +6,13 @@ let server_url;
 if (process.env.NODE_ENV == 'production')
   server_url = 'http://localhost:3044/api';
 else server_url = 'https://social.katelinlis.xyz/api';
-const clientRedis = redis.createClient();
-clientRedis.on('error', function (error) {
-  console.error(error);
-});
+let clientRedis;
+if (process.env.NODE_ENV == 'production') {
+  clientRedis = redis.createClient();
+  clientRedis.on('error', function (error) {
+    console.error(error);
+  });
+}
 @Injectable()
 export class UsersService {
   async getUserByToken(token: string): Promise<UserAuth> {
@@ -46,7 +49,7 @@ export class UsersService {
   }
   async getFromRedis(request): Promise<userExtend> {
     return new Promise((resolve, reject) => {
-      if (process.env.NODE_ENV == 'production')
+      if (process.env.NODE_ENV == 'production' && clientRedis)
         clientRedis.get(request, function (err, res) {
           if (err) reject(err);
           if (res) {
