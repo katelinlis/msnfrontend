@@ -51,6 +51,16 @@ export class UsersController {
           throw 404;
         }
       });
+
+    const posts = await this.appService
+      .getWall(id, token)
+      .catch((status: number) => {
+        if (status == 404) {
+          res.status(404);
+          res.send('404');
+          throw 404;
+        }
+      });
     console.log(typeof user);
 
     const auth = await this.appService
@@ -65,6 +75,7 @@ export class UsersController {
 
     return {
       user,
+      posts,
       auth,
       title: `${user && user.username} - `,
     };
@@ -89,7 +100,6 @@ export class UsersController {
           res.redirect('/login');
         }
       });
-
 
     return {
       user,

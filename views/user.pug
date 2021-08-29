@@ -80,24 +80,16 @@ block content
       div#wall
         span wall
         div
-          div
-            textarea(name="" style="width:83%; max-width:83%; max-height:50px")
-            button send
-          div
-            div  username
-              span  27.08.2021
-            div Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo nostrum, corrupti nisi doloremque debitis quod! Voluptate pariatur ullam ipsam aperiam aliquam debitis. Quo veritatis distinctio vitae libero cupiditate accusamus neque?
-          br
-          div
-            div  username
-              span  27.08.2021
-            div Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo nostrum, corrupti nisi doloremque debitis quod! Voluptate pariatur ullam ipsam aperiam aliquam debitis. Quo veritatis distinctio vitae libero cupiditate accusamus neque?
-          br
-          div
-            div  username
-              span  27.08.2021
-            div Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo nostrum, corrupti nisi doloremque debitis quod! Voluptate pariatur ullam ipsam aperiam aliquam debitis. Quo veritatis distinctio vitae libero cupiditate accusamus neque?
-
+          if user.me
+            div
+              textarea(name="" id="wallInput" style="width:83%; max-width:83%; max-height:50px")
+              button(onclick="WallSend()") send
+          each post,index in posts
+            div
+              div #{user.username}
+                span  #{post.time}
+              div #{post.text}
+            br
 block scripts
   style
     include css/user.css
