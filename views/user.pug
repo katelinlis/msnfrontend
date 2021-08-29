@@ -1,7 +1,7 @@
 extends layout.pug
 block content
   .content
-    div
+    .userAvatarAndAbout
       div(style="display: inline-block;")
         span#username #{user.username}
         br
@@ -44,34 +44,39 @@ block content
           div
             div Имя
             div(style="margin-left: 20px;") #{user.first_name} #{user.last_name}
+          if user.years
+            div
+              div Возраст
+              div(style="margin-left: 20px;") #{user.years} года
+          if user.pronouns
+            div
+              div Местоимения
+              div(style="margin-left: 20px;") #{user.pronouns}
+          if user.user_location
+            div
+              div Откуда
+              div(style="margin-left: 20px;") #{user.user_location}
+          if user.bio
+            div
+              div bio
+              div(style="margin-left: 20px;") #{user.bio}
+    .friendsAndWall
+      .friends
+        div(style="margin-left:8px")
+          span#FriendsTitle
+            a(href=`/user/${user.id}/friends` style="text-decoration: unset;color: #000000;") Friends
+          span#count_friends  #{user.friends && user.friends.count}
           div
-            div Возраст
-            div(style="margin-left: 20px;") #{user.years} года
-          div
-            div Местоимения
-            div(style="margin-left: 20px;") #{user.pronouns}
-          div
-            div Откуда
-            div(style="margin-left: 20px;") #{user.user_location}
-          div
-            div bio
-            div(style="margin-left: 20px;") #{user.bio}
-    .friends
-      div(style="margin-left:8px")
-        span#FriendsTitle
-          a(href=`/user/${user.id}/friends` style="text-decoration: unset;color: #000000;") Friends
-        span#count_friends  #{user.friends && user.friends.count}
-        div
-          if user.friends
-            each friend,index in user.friends.list
-              if index <4
-                span#friend
-                  a(href=`/user/${friend.id}`)
-                    if friend.avatar
-                      img(height="30px" width="30px" style=`border-radius: 100%;` src=`https://social.katelinlis.xyz/api/static/${friend.id}/${friend.avatar}`)
-                    else
-                      img(height="30px" width="30px" style=`border-radius: 100%;`  alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
-                    span(style="font-size:14px;width:30px") #{friend.username.slice(0,6)}..
+            if user.friends
+              each friend,index in user.friends.list
+                if index <4
+                  span#friend
+                    a(href=`/user/${friend.id}`)
+                      if friend.avatar
+                        img(height="30px" width="30px" style=`border-radius: 100%;` src=`https://social.katelinlis.xyz/api/static/${friend.id}/${friend.avatar}`)
+                      else
+                        img(height="30px" width="30px" style=`border-radius: 100%;`  alt="user avatar" src="https://social.katelinlis.xyz/UserProfileImage.svg")
+                      span(style="font-size:14px;width:30px") #{friend.username.slice(0,6)}..
       div#wall
         span wall
         div

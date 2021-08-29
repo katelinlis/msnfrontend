@@ -67,9 +67,33 @@
   display: inline-block;
   width:300px;
   position: relative;
-  left: 79vh;
-  top: -10vh;
+  left: 57.5vh;
 }
+
+.userAvatarAndAbout{
+  display: flex;
+}
+
+.friendsAndWall{
+  display: flex;
+}
+
+
+@media screen and (orientation: portrait) {
+.userAvatarAndAbout{
+  display: block;
+}
+.friendsAndWall{
+  display: block;
+
+}
+  #wall{
+
+  left: 0;
+}
+
+}
+
 
 #wall > div {
    width:300px;
@@ -81,7 +105,6 @@
   width:300px;
   position: relative;
   left: 54vh;
-  top: -5vh;
 }
 
 #aboutblock > div {
