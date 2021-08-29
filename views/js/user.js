@@ -11,6 +11,22 @@ let headers = {};
 if (token) headers['Authorization'] = `Bearer ${token}`;
 main();
 console.log(123);
+async function WallSend() {
+  let wallInput = document.getElementById('wallInput').value;
+
+  axios
+    .post(
+      'https://social.katelinlis.xyz/api/wall/send',
+      { text: wallInput },
+      { headers: { Authorization: `Bearer ${token}` } },
+    )
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
 async function request_friend() {
   if (friend_status.status === 0 && friend_status.forme === true) {
     axios

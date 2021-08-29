@@ -79,6 +79,43 @@ export class UsersService {
     return response;
   }
 
+  async getWall(id: number, token: string): Promise<userExtend> {
+    const response = await this.getFromRedis('wallget/' + id).catch(
+      async (err) => {
+        const data_from_server = await this.requestWallServer(id, token);
+        if (process.env.NODE_ENV == 'production') {
+          await clientRedis.set(
+            'wallget/' + id,
+            JSON.stringify(data_from_server),
+          );
+          clientRedis.expire('wallget/' + id + '' + token, 15);
+        }
+        return data_from_server;
+      },
+    );
+
+    return response;
+  }
+
+  async requestWallServer(id, token): Promise<userExtend> {
+    const response = await axios
+      .get(`${server_url}/wall/get/` + id, {
+        headers: { authorization: 'bearer ' + token },
+      })
+      .then((response) => {
+        if (response) {
+          const user = response.data.posts;
+          return user;
+        }
+        return response;
+      })
+      .catch((err) => {
+        if (err.response.status === 404) throw 404;
+        return {};
+      });
+    return response;
+  }
+
   async requestUserServer(id, token): Promise<userExtend> {
     const response = await axios
       .get(`${server_url}/user/get/` + id, {
