@@ -21,15 +21,19 @@ async function WallSend() {
     )
     .then(function (response) {
       document.getElementById('wallInput').value = '';
-      var div = document.createElement('div');
-      div.innerHTML = `
-        <div> ${document.getElementById('username').innerText}
-          <span> Только что</span>
-        </div>
-        <div> ${response.data.post.text}</div>
-        <br/>
-      `;
-      document.getElementById('posts').prepend(div);
+      var post = document.createElement('div');
+      var divUsernameAndTime = document.createElement('div');
+      divUsernameAndTime.append(document.getElementById('username').innerText);
+      divUsernameAndTime.append(
+        (document.createElement('span').innerText = 'Только что'),
+      );
+      post.append(divUsernameAndTime);
+      post.append(
+        (document.createElement('div').innerText = response.data.post.text),
+      );
+      post.append(document.createElement('br'));
+
+      document.getElementById('posts').prepend(post);
     })
     .catch(function (error) {
       console.log(error);
