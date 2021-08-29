@@ -88,7 +88,7 @@ export class UsersService {
             'wallget/' + id,
             JSON.stringify(data_from_server),
           );
-          clientRedis.expire('wallget/' + id + '' + token, 15);
+          clientRedis.expire('wallget/' + id, 15);
         }
         return data_from_server;
       },
