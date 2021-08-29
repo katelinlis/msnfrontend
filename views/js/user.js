@@ -31,7 +31,6 @@ async function WallSend() {
       post.append(
         (document.createElement('div').innerText = response.data.post.text),
       );
-      post.append(document.createElement('br'));
 
       document.getElementById('posts').prepend(post);
     })
