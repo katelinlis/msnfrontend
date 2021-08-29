@@ -84,12 +84,13 @@ block content
             div
               textarea(name="" id="wallInput" style="width:83%; max-width:83%; max-height:50px")
               button(onclick="WallSend()") send
-          each post,index in posts
-            div
-              div #{user.username}
-                span  #{post.time}
-              div #{post.text}
-            br
+          #posts
+            each post,index in posts
+              div
+                div #{user.username}
+                  span  #{post.time}
+                div #{post.text}
+              br
 block scripts
   style
     include css/user.css

@@ -13,7 +13,6 @@ main();
 console.log(123);
 async function WallSend() {
   let wallInput = document.getElementById('wallInput').value;
-
   axios
     .post(
       'https://social.katelinlis.xyz/api/wall/send',
@@ -21,7 +20,16 @@ async function WallSend() {
       { headers: { Authorization: `Bearer ${token}` } },
     )
     .then(function (response) {
-      console.log(response);
+      document.getElementById('wallInput').value = '';
+      var div = document.createElement('div');
+      div.innerHTML = `
+        <div> ${document.getElementById('username').innerText}
+          <span> Только что</span>
+        </div>
+        <div> ${response.data.post.text}</div>
+        <br/>
+      `;
+      document.getElementById('posts').prepend(div);
     })
     .catch(function (error) {
       console.log(error);
