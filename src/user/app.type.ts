@@ -6,6 +6,12 @@ export interface User {
 
 export interface userExtend extends User {
   me: boolean;
+  bio: string;
+  user_location: string;
+  years: number;
+  pronouns: string;
+  first_name: string;
+  last_name: string;
   friend_status: {
     forme: boolean;
     status: number;
