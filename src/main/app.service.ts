@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import redis from 'redis';
+import * as redis from 'redis';
 let server_url;
 if (process.env.NODE_ENV == 'production')
   server_url = 'http://localhost:3044/api';
