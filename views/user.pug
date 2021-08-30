@@ -25,7 +25,7 @@ block content
         if auth.auth
           if user.me
             #EditUser
-              button(style="width:150px") Обновить информацию
+              button(style="width:150px" onclick="document.location.href = 'https://katelinlis.xyz/settings'") Обновить информацию
           else
             #friendRequestAndSendMessage
               if user.friend_status.status === 1
