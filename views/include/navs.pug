@@ -8,6 +8,7 @@ div(style="position: relative;")
     li
       a(href="/news") Лента
     li
-      a(href=`/user/${auth.user.id}` ) Друзья
+      if auth.auth  
+        a(href=`/user/${auth.user.id}` ) Друзья
     li
       a(href="/users") Список пользователей
