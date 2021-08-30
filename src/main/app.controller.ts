@@ -47,7 +47,19 @@ export class MainController {
         }
       });
 
-    return { auth };
+    const news = await this.appService
+      .getNews(token)
+      .catch((err) => {
+        return err;
+      })
+      .catch((status: number) => {
+        if (status == 401) {
+          res.clearCookie();
+          res.redirect('/login');
+        }
+      });
+
+    return { auth, news };
   }
 
   @Get('/login')

@@ -1,5 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import redis from 'redis';
+let server_url;
+if (process.env.NODE_ENV == 'production')
+  server_url = 'http://localhost:3044/api';
+else server_url = 'https://social.katelinlis.xyz/api';
+let clientRedis;
+if (process.env.NODE_ENV == 'production') {
+  clientRedis = redis.createClient();
+  clientRedis.on('error', function (error) {
+    console.error(error);
+  });
+}
 
 type user = {
   id: number;
@@ -36,7 +48,7 @@ export class MainService {
     }
 
     const response = await axios
-      .get('https://social.katelinlis.xyz/api/auth/user/', {
+      .get(`${server_url}/auth/user/`, {
         headers: { authorization: 'beaber ' + token },
       })
       .catch(() => {
@@ -59,10 +71,9 @@ export class MainService {
     };
   }
   async getUser(id: number, token: string): Promise<user> {
-    const response = await axios.get(
-      'https://social.katelinlis.xyz/api/user/get/' + id,
-      { headers: { authorization: 'beaber ' + token } },
-    );
+    const response = await axios.get(`${server_url}/user/get/` + id, {
+      headers: { authorization: 'beaber ' + token },
+    });
     const user = response.data;
 
     return {
@@ -73,10 +84,60 @@ export class MainService {
       me: user.user.me,
     };
   }
-  async getUsers(): Promise<UsersExport> {
-    const response = await axios.get(
-      'https://social.katelinlis.xyz/api/user/get/',
+
+  async getFromRedis(request): Promise<any> {
+    return new Promise((resolve, reject) => {
+      if (process.env.NODE_ENV == 'production' && clientRedis)
+        clientRedis.get(request, function (err, res) {
+          if (err) reject(err);
+          if (res) {
+            resolve(JSON.parse(res));
+          } else {
+            reject(false);
+          }
+        });
+      else reject(false);
+    });
+  }
+
+  async getNews(token: string): Promise<any> {
+    const response = await this.getFromRedis(`newsget/${token}`).catch(
+      async (err) => {
+        const data_from_server = await this.requestNewsServer(token);
+        if (process.env.NODE_ENV == 'production') {
+          await clientRedis.set(
+            `newsget/${token}`,
+            JSON.stringify(data_from_server),
+          );
+          clientRedis.expire(`newsget/${token}`, 15);
+        }
+        return data_from_server;
+      },
     );
+
+    return response;
+  }
+
+  async requestNewsServer(token): Promise<any> {
+    const response = await axios
+      .get(`${server_url}/wall/get/`, {
+        headers: { authorization: 'bearer ' + token },
+      })
+      .then((response) => {
+        if (response) {
+          return response.data;
+        }
+        return response;
+      })
+      .catch((err) => {
+        if (err.response.status === 404) throw 404;
+        return {};
+      });
+    return response;
+  }
+
+  async getUsers(): Promise<UsersExport> {
+    const response = await axios.get(`${server_url}/user/get/`);
     const user = response.data;
 
     return { users: user.users, total: user.total };
