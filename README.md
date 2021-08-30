@@ -6,7 +6,7 @@
 ## Description
 Платформа <a href="http://social.katelinlis.xyz/" target="blank">рабочей</a> социальной сети, делается как портфолио
 с поддержкой серверного рендеринга (пререндеринг)
-![image](https://user-images.githubusercontent.com/56870191/131152640-48795932-8473-42ad-8597-d5c40fc39c22.png)
+![image](https://user-images.githubusercontent.com/56870191/131363850-f7c4f70a-1d2b-4187-b211-a6ffcb4733cd.png)
 
 
 
