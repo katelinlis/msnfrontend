@@ -3,8 +3,9 @@ block content
   .content(style="position: absolute; ;background: #C4C4C4;height:700px;z-index:1")
     div(style="text-align:center")
       h3 News
-      each post,index in news
-        div
-          div #{post.author}
-            span  #{post.time}
-          div #{post.text}
+      if news
+        each post,index in news
+          div
+            div #{post.author}
+              span  #{post.time}
+            div #{post.text}
