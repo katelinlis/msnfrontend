@@ -7,6 +7,7 @@ import {
   Req,
   Request,
   HttpException,
+  NotFoundException,
 } from '@nestjs/common';
 import { UsersService } from './app.service';
 import { Render } from '@nestjs/common';
@@ -46,9 +47,8 @@ export class UsersController {
       .getUser(id, token)
       .catch((status: number) => {
         if (status == 404) {
-          res.status(404);
-          res.send('404');
-          throw 404;
+          throw new NotFoundException();
+          //throw 404;
         }
       });
 
@@ -56,29 +56,34 @@ export class UsersController {
       .getWall(id, token)
       .catch((status: number) => {
         if (status == 404) {
-          res.status(404);
-          res.send('404');
-          throw 404;
+          throw new NotFoundException();
+          //throw 404;
         }
       });
+
+    //if (!user) return;
     console.log(typeof user);
 
     const auth = await this.appService
       .getUserByToken(token)
       .catch((status: number) => {
         if (status == 401) {
-          //res.clearCookie();
-          res.clearCookie('token');
-          res.redirect('/login');
+          return 401;
         }
       });
 
-    return {
-      user,
-      posts,
-      auth,
-      title: `${user && user.username} - `,
-    };
+    if (auth == 401) {
+      //res.clearCookie('token').redirect('/login');
+      res.clearCookie('token');
+      throw new HttpException('not auth', 401);
+    }
+    if (typeof user == 'object' && user && user.username)
+      return {
+        user,
+        posts,
+        auth,
+        title: `${user && user.username} - `,
+      };
   }
 
   @Get('/user/:id/friends')
@@ -97,7 +102,8 @@ export class UsersController {
       .catch((status: number) => {
         if (status == 401) {
           res.clearCookie('token');
-          res.redirect('/login');
+          throw new HttpException('not auth', 401);
+          return;
         }
       });
 
@@ -116,8 +122,8 @@ export class UsersController {
     const auth = await this.appService.getUserByToken(token).catch((status) => {
       if (status == 401) {
         res.clearCookie('token');
-        res.redirect('/login');
-        throw 401;
+        throw new HttpException('not auth', 401);
+        return;
       }
     });
     return {

@@ -1,4 +1,12 @@
-import { Controller, Get, Res, Param, Req, Request } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Res,
+  Param,
+  Req,
+  Request,
+  HttpException,
+} from '@nestjs/common';
 import { MainService } from './app.service';
 import { Render } from '@nestjs/common';
 
@@ -21,8 +29,8 @@ export class MainController {
       })
       .catch((status: number) => {
         if (status == 401) {
-          res.clearCookie();
-          res.redirect('/login');
+          res.clearCookie('token');
+          throw new HttpException('not auth', 401);
         }
       });
     const userAuth = auth.auth;
@@ -35,6 +43,7 @@ export class MainController {
   async News(@Req() request: RequestCoockie, @Res() res) {
     let token = '';
     if (request.cookies && request.cookies.token) token = request.cookies.token;
+    if (!token) throw new HttpException('not auth', 401);
     const auth = await this.appService
       .getUserByToken(token)
       .catch((err) => {
@@ -42,8 +51,8 @@ export class MainController {
       })
       .catch((status: number) => {
         if (status == 401) {
-          res.clearCookie();
-          res.redirect('/login');
+          res.clearCookie('token');
+          throw new HttpException('not auth', 401);
         }
       });
 
@@ -54,8 +63,8 @@ export class MainController {
       })
       .catch((status: number) => {
         if (status == 401) {
-          res.clearCookie();
-          res.redirect('/login');
+          res.clearCookie('token');
+          throw new HttpException('not auth', 401);
         }
       });
 
