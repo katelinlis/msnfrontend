@@ -73,7 +73,7 @@ block content
                   span#friend
                     a(href=`/user/${friend.id}`)
                       if friend.avatar
-                        img(height="30px" width="30px" style=`border-radius: 100%;` src=`https://cdnsocial.katelinlis.xyz/public/clients/${friend.id}/${friend.avatar}`)
+                        img(height="30px" width="30px" style=`border-radius: 100%;` src=`https://cdnsocial.katelinlis.xyz/public/clients/${friend.id}/100-${friend.avatar}`)
                       else
                         img(height="30px" width="30px" style=`border-radius: 100%;`  alt="user avatar" src="https://cdnsocial.katelinlis.xyz/public/UserProfileImage.svg")
                       span(style="font-size:14px;width:30px") #{friend.username.slice(0,6)}..
