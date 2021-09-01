@@ -4,8 +4,10 @@
 <p align="center">Social network pet project </p>
 
 ## Description
-Платформа <a href="http://social.katelinlis.xyz/" target="blank">рабочей</a> социальной сети, делается как портфолио
-с поддержкой серверного рендеринга (пререндеринг)
+опенсурс Платформа рабочей социальной сети с поддержкой серверного рендеринга
+<br/>
+адрес
+<a href="social.katelinlis.xyz">social.katelinlis.xyz<a/>
 ![image](https://user-images.githubusercontent.com/56870191/131363850-f7c4f70a-1d2b-4187-b211-a6ffcb4733cd.png)
 
 
