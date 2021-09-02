@@ -16,6 +16,14 @@ html(lang="en")
       include include/header.pug
       block content
       include include/navs.pug
+    .footerMobile
+      a(href="/")
+        img(style="width:30px;" src="/img/footer/newspaper.svg")
+      if auth.auth
+        a(href=`/user/${auth.user.id}`)
+          img(style="width:30px;margin-left:40px" src="/img/footer/user.svg")
+      a(href=`/users`)
+        img(style="width:38px;margin-left:40px" src="/img/footer/users.svg")
     script
       include js/yandex.js
     noscript

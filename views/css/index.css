@@ -44,7 +44,27 @@ body {
   visibility: hidden;
 }
 
+.footerMobile {
+  display: none;
+}
+
 @media screen and (orientation: portrait) {
+.navsMenuDesktop{
+  display: none;
+}
+.footerMobile {
+  display: block;
+  font-size: x-large;
+  position: fixed;
+  background-color: wheat;
+  height: 40px;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  z-index: 300;
+  text-align: center;
+}
+
 #aboutblock{
 
   width:180px;

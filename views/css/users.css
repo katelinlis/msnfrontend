@@ -14,3 +14,9 @@
   object-fit: cover;
   border-radius: 100%;
 }
+@media screen and (orientation: portrait) {
+.content {
+  left: 0%!important;
+  width: 100%!important;
+}
+}
