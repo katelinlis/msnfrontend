@@ -80,6 +80,6 @@ export class MainController {
       return err;
     });
 
-    return { auth };
+    return { auth,title: "Авторизоваться - " };
   }
 }
