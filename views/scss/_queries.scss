@@ -1,0 +1,56 @@
+// _queries.scss
+
+@mixin desktop() {
+    @media screen and ( max-width: $layout--desktop_max-width ) {
+        @content;
+    }
+}
+
+@mixin tablet() {
+    @media screen and ( max-width: $layout--tablet_max-width ) and ( orientation: landscape ) {
+        @content;
+    }
+}
+
+@mixin tablet-portrait() {
+    @media screen and ( max-width: $layout--tablet-portrait_max-width ) and ( orientation: portrait ) {
+        @content;
+    }
+}
+
+@mixin mobile() {
+    @media screen and ( max-width: $layout--mobile_max-width ) and ( orientation: landscape ) {
+        @content;
+    }
+}
+
+@mixin mobile-portrait() {
+    @media screen and ( max-width: $layout--mobile-portrait_max-width ) and ( orientation: portrait ) {
+        @content;
+    }
+}
+
+@mixin tablet-all() {
+    @media screen and ( max-width: $layout--tablet_max-width )          and ( orientation: landscape ), 
+           screen and ( max-width: $layout--tablet-portrait_max-width ) and ( orientation: portrait )  {
+        @content;
+    }
+}
+
+@mixin mobile-all() {
+    @media screen and ( max-width: $layout--mobile_max-width )          and ( orientation: landscape ),
+           screen and ( max-width: $layout--mobile-portrait_max-width ) and ( orientation: portrait ) {
+        @content;
+    }
+}
+
+@mixin hover() {
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            @content;
+        }
+    }
+    &:active {
+        @content;
+    }
+}
