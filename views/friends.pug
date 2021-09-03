@@ -15,9 +15,18 @@ html(lang="en")
       include include/header.pug
       .content(style="position: absolute; ;background: #C4C4C4;height: auto;min-height: 700px;z-index:1")
         div(style="text-align:center")
-          h3 <a href="./">Username</a>
-            span#countusers  count
+          h3 <a href="./">#{user.username}</a>
+            span#countusers  #{user.friends.count}
           #users
+            if user.friends
+              each friend,index in user.friends.list
+                div#friend(style="margin-top:10px")
+                  a(href=`/user/${friend.id}`)
+                    if friend.avatar
+                      img(height="35px" width="35px" style=`border-radius: 100%;` src=`https://cdnsocial.katelinlis.xyz/public/clients/${friend.id}/100-${friend.avatar}`)
+                    else
+                      img(height="35px" width="35px" style=`border-radius: 100%;`  alt="user avatar" src="https://cdnsocial.katelinlis.xyz/public/UserProfileImage.svg")
+                    span(style="font-size:14px;width:30px") #{friend.username}..
 
 
 
