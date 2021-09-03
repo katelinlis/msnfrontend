@@ -30,7 +30,12 @@ export class UsersController {
       return err;
     });
 
-    return { UsersExport, auth };
+    return {
+      UsersExport,
+      auth,
+      description: `Список пользователей социальной сети Modern social`,
+      keywords: `Пользователи, юзеры, список пользователей, участники соц сети, открытая социальная сеть, свободная социальная сеть`,
+    };
   }
 
   @Get('/user/:id')
@@ -77,12 +82,30 @@ export class UsersController {
       res.clearCookie('token');
       throw new HttpException('not auth', 401);
     }
+
+    const friendsDesc =
+      user && user.friends.count > 0
+        ? `дружит с ${user.friends.count} пользователями ${user.friends.list
+            .slice(0, 6)
+            .map((user, index) => {
+              if (index < 6) return user.username;
+            })}`
+        : '';
+
+    const postsDesc = posts
+      ? `,написал(а) ${
+          posts[0] ? `${posts[0].time + ': ' + posts[0].text}` : ''
+        }`
+      : '';
+
     if (typeof user == 'object' && user && user.username)
       return {
         user,
         posts,
         auth,
         title: `${user && user.username} - `,
+        description: `Пользователь ${user.username} ${friendsDesc} ${postsDesc}`,
+        keywords: `${user.username}, пользователь, участник, пользователь социальной сети, страница пользователя, страница ${user.username}, ${user.username} в соцсети`,
       };
   }
 
@@ -106,12 +129,24 @@ export class UsersController {
           return;
         }
       });
+    const friendsDesc =
+      user && user.friends.count > 0
+        ? `дружит с ${
+            user.friends.count
+          } пользователями ${user.friends.list.map((user, index) => {
+            return user.username;
+          })}
+        `
+        : '';
 
-    return {
-      user,
-      auth,
-      title: `${user.username} - `,
-    };
+    if (typeof user == 'object' && user && user.username)
+      return {
+        user,
+        auth,
+        title: `${user && user.username} - `,
+        description: `Друзья пользователя ${user.username} ${friendsDesc}`,
+        keywords: `${user.username}, пользователь, участник, пользователь социальной сети, страница пользователя, страница ${user.username}, ${user.username} в соцсети`,
+      };
   }
   @Get('/settings')
   @Render('settings')

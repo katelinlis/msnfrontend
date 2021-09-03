@@ -1,11 +1,19 @@
 doctype html
-html(lang="en")
+html(lang="ru")
   head
     meta(charset="UTF-8")
     script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
     link(rel="icon" href="/favicon.svg")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title #{title} Modern Social
+    if description
+      meta(name="description" content=`${description}`)
+    else
+     meta(name="description" content='Социальная сеть с открытым исходным кодом, которая позволяет пользователям влиять на будущее сайта')
+    if keywords
+      meta(name="Keywords" content=`${keywords}`)
+    else
+      meta(name="Keywords" content="социальная сеть, соцсеть, msn, modern social, opensource, исходный код, открытый исходный код,github, msnsocial, social network")
     block scripts
     style
       include css/index.css
