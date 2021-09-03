@@ -7,6 +7,9 @@ html(lang="ru")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title #{title} Modern Social
 
+    if user && user.avatar
+      meta( property="og:image" content=`https://cdnsocial.katelinlis.xyz/public/clients/${user.id}/${user.avatar}`)
+
     if description
       meta(name="description" content=`${description}`)
       meta( property="og:description" content=`${description}`)
