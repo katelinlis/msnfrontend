@@ -1,0 +1,18 @@
+// _mixins.scss
+
+// --vh calculating throught the script document.
+// https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
+// const OnResize = function() {
+//     let vh = window.innerHeight * 0.01;
+//     document.documentElement.style.setProperty( '--vh', `${vh}px` );
+// }
+
+@mixin height( $x ) {
+	height: #{$x}vh;
+	height: calc( var( --vh, 1vh ) * #{$x} );
+}
+
+@mixin top( $x ) {
+	top: #{$x}vh;
+	top: calc( var( --vh, 1vh ) * #{$x} );
+}

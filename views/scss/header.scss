@@ -1,0 +1,48 @@
+// header.scss
+
+$header-offset: 12px;
+$login-button-padding: 5px 15px 5px 15px;
+$login-button-border-radius: 5px;
+
+@import "_layout.scss";
+@import "_functions.scss"; 
+@import "_mixins.scss";
+@import "_queries.scss";
+
+.header-container {
+	position: relative;
+	display: block;
+	background: #DBDBDB;
+}
+
+.header-logo {
+	position: relative;
+	display: block;
+	padding: $header-offset;
+}
+
+.login-container {
+	position: absolute;
+	display: block;
+	top: 50%;
+	right: $header-offset;
+	transform: translateY( -50% );
+}
+
+.login-button {
+	color: #FFFFFF;
+	box-sizing: border-box;
+	padding: $login-button-padding;
+	border-radius: $login-button-border-radius;
+
+	font-family: 'Montserrat-Light', Verdana, sans-serif;
+	font-size: 14px;
+	text-decoration: dotted;
+	white-space: nowrap;
+
+	transition: background-color 0.5s;
+	background-color: #C4C4C4;
+	@include hover() {
+		background-color: #A3A3A3;
+	}
+}

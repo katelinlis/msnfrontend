@@ -1,0 +1,13 @@
+// _functions.scss
+
+@function ctx-size( $size ) {
+    @return ( ( $size / $layout_width ) + ( $size / $layout_height ) ) * 0.5;
+}
+
+@function w-size( $size ) {
+    @return ( $size / $layout_width ) * 100vw;
+}
+
+@function t-coef( $start-value, $end-value ) {
+    @return calc( #{$start-value} + var( --tc, 1vw ) * #{$end-value - $start-value} );
+}
