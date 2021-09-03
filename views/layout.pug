@@ -6,10 +6,13 @@ html(lang="ru")
     link(rel="icon" href="/favicon.svg")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title #{title} Modern Social
+
     if description
       meta(name="description" content=`${description}`)
+      meta( property="og:description" content=`${description}`)
     else
      meta(name="description" content='Социальная сеть с открытым исходным кодом, которая позволяет пользователям влиять на будущее сайта')
+     meta( property="og:description" content='Социальная сеть с открытым исходным кодом, которая позволяет пользователям влиять на будущее сайта')
     if keywords
       meta(name="Keywords" content=`${keywords}`)
     else
