@@ -1,0 +1,11 @@
+mixin post
+  each post,index in news
+
+    div(style="background-color:wheat; height:100px;position:relative")
+      div(style="font-size:15px") #{post.author} Author name
+        div(style="font-size:14px;color:gray")
+          a(href="/post/id" style="color: unset;text-decoration: none;") #{post.time}
+      div #{post.text}
+      div(style="position:absolute;bottom:0;display: flex;flex-direction: row;width: 100%;")
+        div(style="width: 50%;") лайк
+        div(style="width: 50%;text-align: right;") ответить
