@@ -32,7 +32,7 @@ async function WallSend() {
         );
         post.append(divUsernameAndTime);
         post.append(
-          (document.createElement('div').innerText = response.data.post.text),
+          (document.createElement('div').innerText = response.data.text),
         );
 
         document.getElementById('posts').prepend(post);
