@@ -52,6 +52,10 @@ body {
 margin-bottom: 15px;
 }
 
+a {
+  color: unset;text-decoration: none;
+}
+
 @media screen and (orientation: portrait) {
 .navsMenuDesktop{
   display: none;
