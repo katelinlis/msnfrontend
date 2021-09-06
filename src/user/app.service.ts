@@ -3,9 +3,14 @@ import axios from 'axios';
 import * as redis from 'redis';
 import { UserAuth, userExtend, UsersExport } from './app.type.js';
 let server_url;
-if (process.env.NODE_ENV == 'production')
+let Wallserver_url;
+if (process.env.NODE_ENV == 'production') {
   server_url = 'http://localhost:3044/api';
-else server_url = 'https://social.katelinlis.xyz/api';
+  Wallserver_url = 'http://localhost:3053/api';
+} else {
+  server_url = 'https://social.katelinlis.xyz/api';
+  Wallserver_url = server_url;
+}
 let clientRedis;
 if (process.env.NODE_ENV == 'production') {
   clientRedis = redis.createClient();
@@ -99,7 +104,7 @@ export class UsersService {
 
   async requestWallServer(id, token): Promise<userExtend> {
     const response = await axios
-      .get(`${server_url}/wall/get/` + id, {
+      .get(`${Wallserver_url}/wall/get/` + id, {
         headers: { authorization: 'bearer ' + token },
       })
       .then((response) => {
@@ -111,7 +116,6 @@ export class UsersService {
       })
       .catch((err) => {
         if (err.response.status === 404) throw 404;
-        return {};
       });
     return response;
   }
