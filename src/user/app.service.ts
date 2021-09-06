@@ -109,8 +109,8 @@ export class UsersService {
       })
       .then((response) => {
         if (response) {
-          const user = response.data.posts;
-          return user;
+          const posts = response.data;
+          return posts;
         }
         return response;
       })
