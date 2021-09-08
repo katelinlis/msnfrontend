@@ -43,6 +43,9 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+  
+## Другие репозитории
+<a href="https://github.com/katelinlis/Wallbackend">github.com/katelinlis/Wallbackend</a> - Бэкенд для  стены
 
 ## Donate
 support
