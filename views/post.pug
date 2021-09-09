@@ -5,7 +5,7 @@ mixin post
       h3(style="font-size:15px;margin: 0;")
         a(href=`/user/${post.author}`) #{post.author_username}
         div(style="font-size:14px;color:gray")
-          a(href=`/post/${post.id}_${post.author}`) #{post.time}
+          #{post.time}
       p(style="margin: 0;") #{post.text}
       div(style="position:absolute;bottom:0;display: flex;flex-direction: row;width: 100%;")
         div(style="width: 50%;") #{post.Likes} лайков
