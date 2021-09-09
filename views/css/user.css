@@ -81,9 +81,16 @@
 #posts > div{
 margin-bottom: 15px;
 }
-
+#posts{
+width:100%
+  margin-left: unset;
+}
 
 @media screen and (orientation: portrait) {
+  #posts{
+width:100%
+  margin-left: unset;
+}
 .userAvatarAndAbout{
   display: block;
 }
