@@ -12,7 +12,7 @@ block content
                 img(height="40px" width="40px" src=`https://cdnsocial.katelinlis.xyz/public/clients/${user.id}/100-${user.avatar}`)
               else
                 img(height="40px" width="40px" src="https://cdnsocial.katelinlis.xyz/public/UserProfileImage.svg")
-              span #{user.username}
+              span(style="overflow: hidden;text-overflow: ellipsis;") #{user.username}
 block scripts
   style
     include css/users.css
