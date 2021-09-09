@@ -29,7 +29,7 @@ export class UsersService {
     }
     const response = await axios
       .get(`${server_url}/auth/user/`, {
-        headers: { authorization: 'beaber ' + token },
+        headers: { authorization: 'Bearer ' + token },
       })
       .then((response) => {
         if (response) return response.data;
@@ -105,7 +105,7 @@ export class UsersService {
   async requestWallServer(id, token): Promise<userExtend> {
     const response = await axios
       .get(`${Wallserver_url}/wall/get/` + id, {
-        headers: { authorization: 'bearer ' + token },
+        headers: { authorization: 'Bearer ' + token },
       })
       .then((response) => {
         if (response) {
@@ -123,7 +123,7 @@ export class UsersService {
   async requestUserServer(id, token): Promise<userExtend> {
     const response = await axios
       .get(`${server_url}/user/get/` + id, {
-        headers: { authorization: 'bearer ' + token },
+        headers: { authorization: 'Bearer ' + token },
       })
       .then((response) => {
         if (response) {

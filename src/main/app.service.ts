@@ -54,7 +54,7 @@ export class MainService {
 
     const response = await axios
       .get(`${server_url}/auth/user/`, {
-        headers: { authorization: 'beaber ' + token },
+        headers: { authorization: 'Bearer ' + token },
       })
       .catch(() => {
         throw {
@@ -77,7 +77,7 @@ export class MainService {
   }
   async getUser(id: number, token: string): Promise<user> {
     const response = await axios.get(`${server_url}/user/get/` + id, {
-      headers: { authorization: 'beaber ' + token },
+      headers: { authorization: 'Bearer ' + token },
     });
     const user = response.data;
 
@@ -125,8 +125,8 @@ export class MainService {
 
   async requestNewsServer(token): Promise<any> {
     const response = await axios
-      .get(`${Wallserver_url}/wall/get/`, {
-        headers: { authorization: 'bearer ' + token },
+      .get(`${Wallserver_url}/wall/get`, {
+        headers: { authorization: 'Bearer ' + token },
       })
       .then((response) => {
         if (response) {
