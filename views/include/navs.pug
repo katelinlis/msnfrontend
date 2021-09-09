@@ -9,6 +9,6 @@ div(style="position: relative;")
       a(href="/news") Лента
     li
       if auth.auth
-        a(href=`/user/${auth.user.id}` ) Друзья
+        a(href=`/user/${auth.user.id}/friends` ) Друзья
     li
       a(href="/users") Список пользователей
