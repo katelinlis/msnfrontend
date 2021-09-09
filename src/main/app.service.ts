@@ -2,9 +2,14 @@ import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import * as redis from 'redis';
 let server_url;
-if (process.env.NODE_ENV == 'production')
+let Wallserver_url;
+if (process.env.NODE_ENV == 'production') {
   server_url = 'http://localhost:3044/api';
-else server_url = 'https://social.katelinlis.xyz/api';
+  Wallserver_url = 'http://localhost:3053/api';
+} else {
+  server_url = 'https://social.katelinlis.xyz/api';
+  Wallserver_url = server_url;
+}
 let clientRedis;
 if (process.env.NODE_ENV == 'production') {
   clientRedis = redis.createClient();
@@ -120,7 +125,7 @@ export class MainService {
 
   async requestNewsServer(token): Promise<any> {
     const response = await axios
-      .get(`${server_url}/wall/get/`, {
+      .get(`${Wallserver_url}/wall/get/`, {
         headers: { authorization: 'bearer ' + token },
       })
       .then((response) => {
