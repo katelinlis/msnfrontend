@@ -101,7 +101,7 @@ export class UsersController {
     if (typeof user == 'object' && user && user.username)
       return {
         user,
-        posts,
+        news: posts,
         auth,
         title: `${user && user.username} - `,
         description: `Пользователь ${user.username} ${friendsDesc} ${postsDesc}`,

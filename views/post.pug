@@ -1,0 +1,12 @@
+mixin post
+  each post,index in news
+
+    article(style="background-color:#e1eae7; height:100px;position:relative;    margin-bottom: 10px;")
+      h3(style="font-size:15px;margin: 0;")
+        a(href=`/user/${post.author}`) #{post.author_username}
+        div(style="font-size:14px;color:gray")
+          a(href=`/post/${post.id}_${post.author}`) #{post.time}
+      p(style="margin: 0;") #{post.text}
+      div(style="position:absolute;bottom:0;display: flex;flex-direction: row;width: 100%;")
+        div(style="width: 50%;") #{post.Likes} лайков
+        div(style="width: 50%;text-align: right;") ответить

@@ -1,4 +1,5 @@
 extends layout.pug
+include post.pug
 block content
   .content
     .userAvatarAndAbout
@@ -85,11 +86,7 @@ block content
               textarea(name="" id="wallInput" style="width:83%; max-width:83%; max-height:50px")
               button(onclick="WallSend()") send
           #posts
-            each post,index in posts
-              div
-                div #{user.username}
-                  span  #{post.time}
-                div #{post.text}
+            +post
 block scripts
   style
     include css/user.css
