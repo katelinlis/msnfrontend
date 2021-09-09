@@ -20,12 +20,13 @@ html(lang="ru")
       meta(name="Keywords" content=`${keywords}`)
     else
       meta(name="Keywords" content="социальная сеть, соцсеть, msn, modern social, opensource, исходный код, открытый исходный код,github, msnsocial, social network")
-    block scripts
-    link(rel="stylesheet", type="text/css", href="/css/header.css")
     style
       include css/index.css
     script
       include js/index.js
+    block scripts
+    link(rel="stylesheet", type="text/css", href="/css/header.css")
+
   body
     .container(style="position: relative;background: #F8F5F5;height:800px;")
       include include/header.pug
