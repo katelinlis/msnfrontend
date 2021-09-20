@@ -8,7 +8,8 @@
 <br/>
 адрес
 <a href="https://social.katelinlis.xyz">social.katelinlis.xyz<a/>
-![image](https://user-images.githubusercontent.com/56870191/131363850-f7c4f70a-1d2b-4187-b211-a6ffcb4733cd.png)
+![image](https://user-images.githubusercontent.com/56870191/134052977-495f5c7c-030c-4e4d-8fa1-98576b34a8af.png)
+
 
 
 
