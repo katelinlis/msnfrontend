@@ -7,10 +7,10 @@ block content
       #users
         if user.friends
           each friend,index in user.friends.list
-            div#friend(style="margin-top:10px")
+            div#friend
               a(href=`/user/${friend.id}`)
                 if friend.avatar
-                  img(height="35px" width="35px" style=`border-radius: 100%;` src=`https://cdnsocial.katelinlis.xyz/public/clients/${friend.id}/100-${friend.avatar}`)
+                  img(height="35px" width="35px" src=`https://cdnsocial.katelinlis.xyz/public/clients/${friend.id}/100-${friend.avatar}`)
                 else
-                  img(height="35px" width="35px" style=`border-radius: 100%;`  alt="user avatar" src="https://cdnsocial.katelinlis.xyz/public/UserProfileImage.svg")
+                  img(height="35px" width="35px" alt="user avatar" src="https://cdnsocial.katelinlis.xyz/public/UserProfileImage.svg")
                 span(style="font-size:14px;width:30px") #{friend.username}..
