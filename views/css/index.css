@@ -65,7 +65,7 @@ a {
     height: 40px;
     margin-top: 5px;
   }
-  #friend>a>img {
+  .content>div>#friend>a>img {
     position: absolute;
     left: 35%;
     margin-top: -10px;
