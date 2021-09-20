@@ -143,7 +143,7 @@ export class UsersController {
       return {
         user,
         auth,
-        title: `${user && user.username} - `,
+        title: `друзья ${user && user.username} - `,
         description: `Друзья пользователя ${user.username} ${friendsDesc}`,
         keywords: `${user.username}, пользователь, участник, пользователь социальной сети, страница пользователя, страница ${user.username}, ${user.username} в соцсети`,
       };
