@@ -6,10 +6,13 @@ html(lang="ru")
     link(rel="icon" href="/favicon.svg")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title #{title} Modern Social
-
+    // Необходимо реализовать параметр page для определения страницы чтобы по определенной странице выдавать определенный контент
     if user && user.avatar
       meta( property="og:image" content=`https://cdnsocial.katelinlis.xyz/public/clients/${user.id}/${user.avatar}`)
-      link(rel="canonical" href=`https://social.katelinlis.xyz/user/${user.id}`)
+      if news
+        link(rel="canonical" href=`https://social.katelinlis.xyz/user/${user.id}`)
+      else
+        link(rel="canonical" href=`https://social.katelinlis.xyz/user/${user.id}/friends`)
 
     if description
       meta(name="description" content=`${description}`)
