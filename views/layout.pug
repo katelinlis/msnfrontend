@@ -9,6 +9,7 @@ html(lang="ru")
 
     if user && user.avatar
       meta( property="og:image" content=`https://cdnsocial.katelinlis.xyz/public/clients/${user.id}/${user.avatar}`)
+      link(rel="canonical" href=`https://social.katelinlis.xyz/user/${user.id}`)
 
     if description
       meta(name="description" content=`${description}`)
