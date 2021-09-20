@@ -69,6 +69,7 @@ a {
     position: absolute;
     left: 35%;
     margin-top: -10px;
+    border-radius: 100%;
   }
 
 @media screen and (orientation: portrait) {
