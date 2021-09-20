@@ -61,7 +61,20 @@ a {
   color: unset;text-decoration: none;
 }
 
+  div#friend {
+    height: 40px;
+    margin-top: 5px;
+  }
+  #friend>a>img {
+    position: absolute;
+    left: 35%;
+    margin-top: -10px;
+  }
+
 @media screen and (orientation: portrait) {
+    #friend>a>img {
+    left: 15%;
+  }
   #posts {
     width: 85%;
     margin-left: 4vh;
