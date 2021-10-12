@@ -100,7 +100,7 @@ a {
 
   width:180px;
   position: relative;
-  left: unset;
+  left: unset!important;
   top: unset;
 }
 #aboutblock > div {
